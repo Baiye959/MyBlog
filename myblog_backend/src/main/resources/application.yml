@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: myblog_backend
+  # DataSource Config
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/MyBlog
+    username: root
+    password: Baiye959
+  # session失效时间
+  session:
+    timeout: 86400
+# MyBatis Plus 的配置
+mybatis-plus:
+#  # mapper 映射文件的路径，可以有多个
+#  mapper-locations:
+#    - "classpath*:mappers/**/*.xml"
+  configuration:
+    map-underscore-to-camel-case: false
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # 全局逻辑删除的实体字段名
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
