@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="flex items-center gap-2 rounded-lg bg-white px-4 py-3 shadow-3xl dark:bg-lightblue dark:shadow-black/10">
+    <button type="button" @click="$store.app.toggleSidebar()" class="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-slate-100 transition-all duration-300 hover:bg-slate-200 hover:text-indigo-600 dark:bg-white/5 dark:hover:bg-lightindigo dark:hover:text-white lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentcolor" viewbox="0 0 256 256">
+            <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
+        </svg>
+    </button>
+    <div class="flex flex-1 items-center justify-between gap-2">
+
+        <div class="flex flex-none items-center gap-2">
+            <div class="relative">
+                <button class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 transition-all duration-300 hover:bg-slate-200 hover:text-indigo-600 dark:bg-white/5 dark:hover:bg-lightindigo dark:hover:text-white" x-cloak x-show="$store.app.mode === 'light'" @click="$store.app.toggleMode('dark')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentcolor" viewbox="0 0 256 256">
+                        <path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"></path>
+                    </svg>
+                </button>
+                <button class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 transition-all duration-300 hover:bg-slate-200 hover:text-indigo-600 dark:bg-white/5 dark:hover:bg-lightindigo dark:hover:text-white" x-cloak x-show="$store.app.mode === 'dark'" @click="$store.app.toggleMode('light')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentcolor" viewbox="0 0 256 256">
+                        <path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"></path>
+                    </svg>
+                </button>
+            </div>
+            <div x-data="{ fullScreen: false }">
+                <button class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 transition-all duration-300 hover:bg-slate-200 hover:text-indigo-600 dark:bg-white/5 dark:hover:bg-lightindigo dark:hover:text-white" x-cloak x-bind:class="{ 'hidden': fullScreen, 'block': !fullScreen }" x-on:click="fullScreen = !fullScreen" @click="$store.app.toggleFullScreen()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentcolor" viewbox="0 0 256 256">
+                        <path d="M216,48V88a8,8,0,0,1-16,0V56H168a8,8,0,0,1,0-16h40A8,8,0,0,1,216,48ZM88,200H56V168a8,8,0,0,0-16,0v40a8,8,0,0,0,8,8H88a8,8,0,0,0,0-16Zm120-40a8,8,0,0,0-8,8v32H168a8,8,0,0,0,0,16h40a8,8,0,0,0,8-8V168A8,8,0,0,0,208,160ZM88,40H48a8,8,0,0,0-8,8V88a8,8,0,0,0,16,0V56H88a8,8,0,0,0,0-16Z"></path>
+                    </svg>
+                </button>
+                <button class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 transition-all duration-300 hover:bg-slate-200 hover:text-indigo-600 dark:bg-white/5 dark:hover:bg-lightindigo dark:hover:text-white" x-cloak x-bind:class="{ 'block': fullScreen, 'hidden': !fullScreen }" x-on:click="fullScreen = !fullScreen" @click="$store.app.toggleFullScreen()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentcolor" viewbox="0 0 256 256">
+                        <path d="M152,96V48a8,8,0,0,1,16,0V88h40a8,8,0,0,1,0,16H160A8,8,0,0,1,152,96ZM96,152H48a8,8,0,0,0,0,16H88v40a8,8,0,0,0,16,0V160A8,8,0,0,0,96,152Zm112,0H160a8,8,0,0,0-8,8v48a8,8,0,0,0,16,0V168h40a8,8,0,0,0,0-16ZM96,40a8,8,0,0,0-8,8V88H48a8,8,0,0,0,0,16H96a8,8,0,0,0,8-8V48A8,8,0,0,0,96,40Z"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="relative" x-data="dropdown" @click.outside="open = false">
+                <button type="button" class="flex items-center gap-1.5 xl:gap-0" @click="toggle()">
+                    <img id="user-avatar" class="h-9 w-9 rounded-full xl:mr-2" alt="Header Avatar" />
+                    <span id="user-name" class="hidden xl:block">error</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ms-1 hidden md:block" width="20" height="20" fill="currentcolor" viewbox="0 0 256 256">
+                        <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+                    </svg>
+                </button>
+                <ul class="absolute right-0 top-11 z-10 mt-2 w-40 min-w-[190px] rounded bg-white p-2 text-sm text-slate-400 shadow-md dark:bg-[#323249]" x-cloak x-show="open" x-transition x-transition.duration.300ms>
+                    <li onclick="logout()">
+                        <a href="javaScript:;" class="flex items-center px-4 py-2 text-red-600 transition-all duration-300 hover:bg-slate-100 dark:hover:bg-black/10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-2" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+                                <path d="M112,216a8,8,0,0,1-8,8H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h56a8,8,0,0,1,0,16H48V208h56A8,8,0,0,1,112,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L196.69,120H104a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,221.66,122.34Z"></path>
+                            </svg>
+                            Sign Out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/alpine-collaspe.min.js"></script>
+<script src="assets/js/alpine-persist.min.js"></script>
+<script src="assets/js/alpine.min.js" defer></script>
+<script src="assets/js/perfect-scrollbar.min.js"></script>
+<script src="assets/js/form-editor.js"></script>
+<script src="assets/js/custom.js"></script>
+<!--<script>-->
+<!--    function logout() {-->
+<!--        fetch('http://localhost:8080/api/user/logout', {-->
+<!--            method: 'POST',-->
+<!--            credentials: 'include'-->
+<!--        })-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                if (data.code === 0) {-->
+<!--                    sessionStorage.removeItem('user');-->
+<!--                    window.location.href = 'index.html';-->
+<!--                } else {-->
+<!--                    alert(data.message);-->
+<!--                }-->
+<!--            })-->
+<!--            .catch((error) => {-->
+<!--                console.error('Error:', error);-->
+<!--            });-->
+<!--    }-->
+<!--</script>-->
+</body>
+</html>
