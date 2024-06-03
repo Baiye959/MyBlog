@@ -33,20 +33,20 @@
                     <p class="mb-6 text-gray-400 text-center">Please sign-in to your account.</p>
                     <div class="mb-4">
                         <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">EMAIL ADDRESS</label>
-                        <input type="Email" class="form-input" placeholder="name@example.com">
+                        <input type="Email" class="form-input" placeholder="name@example.com" id="email">
                     </div>
                     <div class="mb-4">
                         <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">PASSWORD</label>
-                        <input type="Email" class="form-input" placeholder="********">
+                        <input type="Password" class="form-input" placeholder="********" id="password">
                     </div>
                     <div class="mb-4 flex items-center justify-between gap-3">
                         <label class="inline-flex items-center gap-2">
-                            <input type="checkbox" class="form-checkbox text-indigo-600">
+                            <input type="checkbox" class="form-checkbox text-indigo-600" id="rememberMe">
                             <span>Remember Me</span>
                         </label>
                         <a href="forgot-password.html" class="text-sm text-indigo-600 hover:underline">Forgot Password?</a>
                     </div>
-                    <button class="btn w-full mb-4 justify-center border-indigo-600 bg-indigo-600 text-white hover:border-indigo-700 hover:bg-indigo-700">Sign in</button>
+                    <button class="btn w-full mb-4 justify-center border-indigo-600 bg-indigo-600 text-white hover:border-indigo-700 hover:bg-indigo-700" onclick="login()">Sign in</button>
                     <p class="text-center">
                         <span>New on our platform?</span> <a href="register.html" class="text-indigo-600 hover:underline"><span>Create an account</span></a>
                     </p>
@@ -59,5 +59,55 @@
     <script src="assets/js/alpine-persist.min.js"></script>
     <script src="assets/js/alpine.min.js" defer></script>
     <script src="assets/js/custom.js"></script>
+    <script>
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            fetch('http://localhost:8080/api/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, userPassword: password }),
+                credentials: 'include' // This ensures cookies are included in requests
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 0) {
+                        if (rememberMe) {
+                            localStorage.setItem('user', JSON.stringify(data.data));
+                        } else {
+                            sessionStorage.setItem('user', JSON.stringify(data.data));
+                        }
+                        window.location.href = 'index.html';
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function checkLogin() {
+            const user = JSON.parse(localStorage.getItem('user')) || JSON.parse(sessionStorage.getItem('user'));
+            if (user) {
+                fetch('http://localhost:8080/api/user/current', {
+                    method: 'GET',
+                    credentials: 'include'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.code === 0 && data.data) {
+                            window.location.href = 'index.html';
+                        }
+                    });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', checkLogin);
+    </script>
 </body>
 </html>

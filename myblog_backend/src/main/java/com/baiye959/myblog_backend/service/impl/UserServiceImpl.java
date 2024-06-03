@@ -41,17 +41,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 1. 校验
         // 均不为空
         if (StringUtils.isAnyBlank(username, userPassword, email)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
+            throw new BusinessException(ErrorCode.NULL_ERROR, "参数为空");
         }
         // 长度校验
-        if (username.length() > 10) {
+        if (username.length() > 50) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户名太长");
         }
         if (userPassword.length() < 6) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码太短");
         }
         // 用户名不能包含特殊字符
-        String validPattern = "\\pP|\\pS|\\s+";
+        String validPattern = "\\pS|\\s+";
         Matcher matcher = Pattern.compile(validPattern).matcher(username);
         if (matcher.find()) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户名不能包含特殊字符");
@@ -91,7 +91,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 1. 校验
         // 均不为空
         if (StringUtils.isAnyBlank(email, userPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
+            throw new BusinessException(ErrorCode.NULL_ERROR, "参数为空");
         }
         // 长度校验
         if (userPassword.length() < 6) {
@@ -107,7 +107,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         User user = userMapper.selectOne(queryWrapper);
         if (user == null) {
             log.info("user login failed, email or userPassword cannot match");
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "邮箱或密码不相同");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "邮箱或密码错误");
         }
 
         // 3. 用户脱敏

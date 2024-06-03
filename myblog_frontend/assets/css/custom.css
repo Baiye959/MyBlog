@@ -293,7 +293,7 @@ body::-webkit-scrollbar-thumb{
 }
 .elisc_tm_sidebar .name .back{
 	position: absolute;
-	top: 50%;
+	top: 19%;
 	left: 50%;
 	transform: translate(-50%,-50%);
 	z-index: 1;

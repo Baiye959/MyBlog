@@ -42,10 +42,15 @@
 				<div class="author w-full float-left pt-[60px]">
 					<div class="image relative w-[118px] inline-block">
 						<img class="relative opacity-0 min-w-full" src="assets/img/thumbs/1-1.jpg" alt="" />
-						<a href="list.html"><div class="main absolute inset-0 bg-no-repeat bg-cover bg-center rounded-full" data-img-url="assets/img/about/4.png"></div></a>
+						<a href="list.html"><div id="user-avatar" class="main absolute inset-0 bg-no-repeat bg-cover bg-center rounded-full" data-img-url="assets/img/about/4.png"></div></a>
 					</div>
 					<div class="name w-full float-left mt-[-19px]">
-						<h3><span>Baiye959<span class="back">Baiye959</span></span></h3>
+<!--						<h3><span id="user-name"><span class="back"></span></span></h3>-->
+						<h3>
+							<span id="back" class="back"></span>
+							<span id="user-name"></span>
+
+						</h3>
 					</div>
 				</div>
 				<div class="menu scrollable w-full float-left">
@@ -89,14 +94,29 @@
 									<div class="subtitle wfll max-w-[80%] float-left mb-[40px]">
 										<p>这是一个博客网站，可以随便逛逛</p>
 									</div>
-									<div class="buttons w-full float-left flex items-center mb-[150px]">
+<!--									<div class="buttons w-full float-left flex items-center mb-[150px]">-->
+<!--										<div class="elisc_tm_button transition_link">-->
+<!--											<a href="login.html">登录</a>-->
+<!--										</div>-->
+<!--										<div class="elisc_tm_button transition_link" data-style="border">-->
+<!--											<a href="register.html">注册</a>-->
+<!--										</div>-->
+<!--									</div>-->
+									<!-- 动态显示登录/注册或登出按钮 -->
+									<div class="buttons w-full float-left flex items-center mb-[150px]" id="authButtons">
+										<!-- 登录/注册按钮 -->
 										<div class="elisc_tm_button transition_link">
-											<a href="login.html">登录</a>
+											<a href="login.html" id="loginButton">登录</a>
 										</div>
 										<div class="elisc_tm_button transition_link" data-style="border">
-											<a href="register.html">注册</a>
+											<a href="register.html" id="registerButton">注册</a>
+										</div>
+										<!-- 登出按钮 -->
+										<div class="elisc_tm_button transition_link" data-style="border" id="logoutButton" style="display: none;">
+											<a href="javascript:" onclick="logout()">登出</a>
 										</div>
 									</div>
+
 									<div class="info w-full float-left">
 										<ul class="relative">
 											<li class="pl-[15px]"><a class="text-[#130F49] font-semibold text-[18px]" href="tel:+77 022 444 05 05">+77 022 444 05 05</a></li>
@@ -316,6 +336,94 @@
 <!--[if lt IE 10]> <script type="text/javascript" src="js/ie8.js"></script> <![endif]-->	
 <script src="assets/js/plugins.js"></script>
 <script src="assets/js/init.js"></script>
+<script>
+	function checkLogin() {
+		fetch('http://localhost:8080/api/user/current', {
+			method: 'GET',
+			credentials: 'include'
+		})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.json();
+				})
+				.then(data => {
+					const loginButton = document.getElementById('loginButton');
+					const registerButton = document.getElementById('registerButton');
+					const logoutButton = document.getElementById('logoutButton');
+
+					if (data.code === 0 && data.data) {
+						loginButton.style.display = 'none';
+						registerButton.style.display = 'none';
+						logoutButton.style.display = 'block';
+					} else {
+						loginButton.style.display = 'block';
+						registerButton.style.display = 'block';
+						logoutButton.style.display = 'none';
+					}
+				})
+				.catch((error) => {
+					console.error('Error:', error);
+				});
+	}
+
+	function logout() {
+		fetch('http://localhost:8080/api/user/logout', {
+			method: 'POST',
+			credentials: 'include'
+		})
+				.then(response => response.json())
+				.then(data => {
+					if (data.code === 0) {
+						sessionStorage.removeItem('user');
+						window.location.href = 'index.html';
+					} else {
+						alert(data.message);
+					}
+				})
+				.catch((error) => {
+					console.error('Error:', error);
+				});
+	}
+
+	function loadUserInfo() {
+		fetch('http://localhost:8080/api/user/current', {
+			method: 'GET',
+			credentials: 'include'
+		})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.json();
+				})
+				.then(data => {
+					if (data.code === 0 && data.data) {
+						const user = data.data;
+						document.getElementById('user-avatar').style.backgroundImage = `url(${user.avatarUrl})`;
+						document.getElementById('user-name').textContent = user.username;
+						document.getElementById('back').textContent = user.username;
+					} else {
+						// 处理用户未登录的情况
+						document.getElementById('user-avatar').style.backgroundImage = `url(assets/img/about/4.png)`;
+						document.getElementById('user-name').textContent = 'Guest';
+						document.getElementById('back').textContent = 'Guest';
+					}
+				})
+				.catch((error) => {
+					console.error('Error:', error);
+					// 处理错误情况
+					document.getElementById('user-avatar').style.backgroundImage = `url(assets/img/about/4.png)`;
+					document.getElementById('user-name').textContent = 'Guest';
+					// <h3><span id="user-name"><span className="back"></span></span></h3>
+					document.getElementById('back').textContent = 'Guest';
+				});
+	}
+
+	document.addEventListener('DOMContentLoaded', checkLogin);
+	document.addEventListener('DOMContentLoaded', loadUserInfo);
+</script>
 <!-- /SCRIPTS -->
 
 </body>
