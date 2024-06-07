@@ -77,8 +77,6 @@
                 .then(data => {
                     if (data.code === 0) {
                         if (rememberMe) {
-                            localStorage.setItem('user', JSON.stringify(data.data));
-                        } else {
                             sessionStorage.setItem('user', JSON.stringify(data.data));
                         }
                         window.location.href = 'index.html';
@@ -92,7 +90,7 @@
         }
 
         function checkLogin() {
-            const user = JSON.parse(localStorage.getItem('user')) || JSON.parse(sessionStorage.getItem('user'));
+            const user = JSON.parse(sessionStorage.getItem('user'));
             if (user) {
                 fetch('http://localhost:8080/api/user/current', {
                     method: 'GET',

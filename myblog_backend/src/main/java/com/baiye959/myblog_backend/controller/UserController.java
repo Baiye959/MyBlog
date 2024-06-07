@@ -9,6 +9,7 @@ import com.baiye959.myblog_backend.model.domain.request.UserLoginRequest;
 import com.baiye959.myblog_backend.model.domain.request.UserRegisterRequest;
 import com.baiye959.myblog_backend.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -60,6 +61,27 @@ public class UserController {
         }
         User user = userService.userLogin(email, userPassword, request);
         return ResultUtils.success(user);
+    }
+
+    @PostMapping("/setting")
+    public BaseResponse<User> userLogin(@RequestBody User user, HttpServletRequest request){
+        if(user==null){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR,"用户信息为空");
+        }
+        String userName = user.getUsername();
+        String email = user.getEmail();
+        String avatarUrl = user.getAvatarUrl();
+
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User currentUser = (User) userObj;
+        if (currentUser == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+
+        long userId = currentUser.getId();
+
+        User newUser = userService.userSetting(userId,userName,email,avatarUrl,request);
+        return ResultUtils.success(newUser);
     }
 
     @PostMapping("/logout")

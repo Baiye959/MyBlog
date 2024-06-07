@@ -44,4 +44,12 @@ public interface UserService extends IService<User> {
      * @param request
      */
     Integer userLogout(HttpServletRequest request);
+
+
+    /**
+     * 设置中 更新用户的信息
+     *
+     * @param userId,userName,email,avatarUrk,request
+     */
+    User userSetting(Long userId,String userName,String email,String avatarUrk,HttpServletRequest request);
 }

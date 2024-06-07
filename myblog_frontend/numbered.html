@@ -161,147 +161,47 @@
                 </script>
 
                 <div class="min-h-[calc(100vh-152px)]">
-                    <h2 class="mb-6 text-lg font-medium text-slate-600 dark:text-white">Numbered</h2>
                     <div class="grid grid-cols-1 gap-6">
                         <div class="rounded-lg bg-white p-6 shadow-3xl dark:bg-lightblue dark:shadow-black/10">
-                            <h5 class="mb-6 text-base font-medium text-slate-600 dark:text-indigo-300">Default</h5>
                             <div x-data="{ activeTab: 1}">
                                 <div class="border-b border-gray-300 dark:border-white/10 pb-6 flex items-center gap-3">
-                                    <button type="button" class="flex items-start gap-2" @click="activeTab = 1">
-                                        <div class="w-10 h-10 rounded-md flex items-center justify-center text-lg bg-gray-300 font-medium " :class="{'bg-indigo-600 text-white': activeTab === 1}">1</div>
+                                   <!-- <button type="button" class="flex items-start gap-2" @click="activeTab = 1"> -->
+                                        <!-- <div class="w-10 h-10 rounded-md flex items-center justify-center text-lg bg-gray-300 font-medium " :class="{'bg-indigo-600 text-white': activeTab === 1}">1</div> -->
                                         <div class="text-left">
                                             <p class="text-[15px] font-semibold mb-px" :class="{'text-indigo-600': activeTab === 1, 'text-gray-400': activeTab === 2}">Account Details</p>
                                             <p class="text-xs text-gray-400">Setup Account</p>
                                         </div>
                                     </button>
-                                    <div class="text-gray-300" :class="{'!text-indigo-600' : activeTab === 2}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentcolor" viewbox="0 0 256 256">
-                                            <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
-                                        </svg>
-                                    </div>
-                                    <button type="button" class="flex items-start gap-2" @click="activeTab = 2">
-                                        <div class="w-10 h-10 rounded-md flex items-center justify-center text-lg bg-gray-300 font-medium text-slate-600" :class="{'!bg-indigo-600 text-white': activeTab === 2}">2</div>
-                                        <div class="text-left">
-                                            <p class="text-[15px] font-semibold mb-px" :class="{'text-indigo-600': activeTab === 2}">Personal Info</p>
-                                            <p class="text-xs text-gray-400">Setup Personal Details</p>
-                                        </div>
-                                    </button>
-                                    <div class="text-gray-300" :class="{'!text-indigo-600' : activeTab === 3}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentcolor" viewbox="0 0 256 256">
-                                            <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
-                                        </svg>
-                                    </div>
-                                    <button type="button" class="flex items-start gap-2" @click="activeTab = 3">
-                                        <div class="w-10 h-10 rounded-md flex items-center justify-center text-lg bg-gray-300 font-medium text-slate-600" :class="{'!bg-indigo-600 text-white': activeTab === 3}">3</div>
-                                        <div class="text-left">
-                                            <p class="text-[15px] font-semibold mb-px" :class="{'text-indigo-600': activeTab === 3}">Social Links</p>
-                                            <p class="text-xs text-gray-400">Add Link</p>
-                                        </div>
-                                    </button>
+
                                 </div>
                                 <div class="pt-6 space-y-4">
                                     <template x-if="activeTab === 1">
                                         <div>
-                                            <h4 class="text-[15px] font-medium mb-4">Account Details</h4>
                                             <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
                                                 <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">USERNAME</label>
-                                                    <input type="text" class="form-input" placeholder="Jinsu">
+                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">userName</label>
+                                                    <input type="text" class="form-input" placeholder="Baiye">
                                                 </div>
                                                 <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">Email</label>
-                                                    <input type="email" class="form-input" placeholder="Jinsu@example.com">
+                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">email</label>
+                                                    <input type="email" class="form-input" placeholder="Baiye@example.com">
                                                 </div>
                                                 <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">PASSWORD</label>
-                                                    <input type="password" class="form-input" placeholder="password">
-                                                </div>
-                                                <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">CONFIRM PASSWORD</label>
-                                                    <input type="password" class="form-input" placeholder="password">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                    <template x-if="activeTab === 2">
-                                        <div>
-                                            <h4 class="text-[15px] font-medium mb-4">Personal Info</h4>
-                                            <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                                                <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">FIRST NAME</label>
-                                                    <input type="text" class="form-input" placeholder="Jinsu">
-                                                </div>
-                                                <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">LAST NAME</label>
-                                                    <input type="email" class="form-input" placeholder="Savan">
-                                                </div>
-                                                <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">COUNTRY</label>
-                                                    <select class="form-select">
-                                                        <option value>Select Country</option>
-                                                        <option value="USA">USA</option>
-                                                        <option value="UK">UK</option>
-                                                        <option value="France">France</option>
-                                                        <option value="Australia">Australia</option>
-                                                        <option value="Spain">Spain</option>
-                                                    </select>
-                                                </div>
-                                                <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">LANGUAGE</label>
-                                                    <select class="form-select">
-                                                        <option value>Select Country</option>
-                                                        <option value="USA">USA</option>
-                                                        <option value="UK">UK</option>
-                                                        <option value="France">France</option>
-                                                        <option value="Australia">Australia</option>
-                                                        <option value="Spain">Spain</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                    <template x-if="activeTab === 3">
-                                        <div>
-                                            <h4 class="text-[15px] font-medium mb-4">Social Links</h4>
-                                            <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                                                <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">TWITTER</label>
-                                                    <input type="text" class="form-input" placeholder="https://twitter.com/">
-                                                </div>
-                                                <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">FACEBOOK</label>
-                                                    <input type="email" class="form-input" placeholder="https://facebook.com/">
-                                                </div>
-                                                <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">GOOGLE+</label>
-                                                    <input type="email" class="form-input" placeholder="https://plus.google.com/">
-                                                </div>
-                                                <div>
-                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">LINKEDIN</label>
-                                                    <input type="email" class="form-input" placeholder="https://linkedin.com/">
+                                                    <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">avatarUrl</label>
+                                                    <input type="url" class="form-input" placeholder="头像链接">
                                                 </div>
                                             </div>
                                         </div>
                                     </template>
                                     <div class="flex items-center gap-3 justify-between">
-                                        <button class="btn border-indigo-600 bg-indigo-600 text-white hover:border-indigo-700 dark:disabled:bg-white/10 dark:disabled:border-white/10 disabled:bg-gray-300 disabled:border-gray-300 hover:bg-indigo-700" :disabled="activeTab === 1" @click="activeTab--">BacK</button>
-                                        <button class="btn border-indigo-600 bg-indigo-600 text-white hover:border-indigo-700 dark:disabled:bg-white/10 dark:disabled:border-white/10 disabled:bg-gray-300 disabled:border-gray-300 hover:bg-indigo-700" :disabled="activeTab === 3" @click="activeTab++">Next</button>
+                                       
+                                        <button class="btn border-indigo-600 bg-indigo-600 text-white hover:border-indigo-700 dark:disabled:bg-white/10 dark:disabled:border-white/10 disabled:bg-gray-300 disabled:border-gray-300 hover:bg-indigo-700" " @click="submitForm()">Submit</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                <footer class="flex flex-wrap items-center justify-center gap-3 px-4 pb-4 sm:justify-between">
-                    <p class="text-sm text-slate-400">&copy; 2023 made with By <a href="http://www.bootstrapmb.com">Reserved</a></p>
-                    <ul class="flex items-center text-sm text-slate-400">
-                        <li><a href="" class="px-2 py-1 transition-all duration-300 hover:text-black">About</a></li>
-                        <li><a href="" class="px-2 py-1 transition-all duration-300 hover:text-black">Support</a></li>
-                        <li><a href="" class="px-2 py-1 transition-all duration-300 hover:text-black">Contact Us</a></li>
-                    </ul>
-                </footer>
 
             </div>
 
@@ -317,5 +217,43 @@
     <script src="assets/js/perfect-scrollbar.min.js"></script>
 
     <script src="assets/js/custom.js"></script>
+	<script>
+		function submitForm(){
+			// 获取userName输入框的值
+			var userNameInput = document.querySelector('input[type="text"]');
+			var userNameValue = userNameInput.value;
+			
+			// 获取email输入框的值
+			var emailInput = document.querySelector('input[type="email"]');
+			var emailValue = emailInput.value;
+			
+			// 获取头像链接输入框的值
+			var avatarInput = document.querySelector('input[type="url"]');
+			var avatarValue = avatarInput.value;
+			
+			// 打印获取到的值
+			fetch('http://localhost:8080/api/user/setting', {
+			    method: 'POST',
+			    headers: {
+			        'Content-Type': 'application/json',
+			    },
+			    body: JSON.stringify({username:userNameValue,email:emailValue,avatarUrl:avatarValue}),
+			    credentials: 'include'
+			})
+			    .then(response => response.json())
+			    .then(data => {
+					// console.log(data);
+			        if (data.code === 0) {
+			            alert("submit successful! ");
+						
+			        } else {
+			            alert(data.message);
+			        }
+			    })
+			    .catch((error) => {
+			        console.error('Error:', error);
+			    });				
+		}
+	</script>
 </body>
 </html>

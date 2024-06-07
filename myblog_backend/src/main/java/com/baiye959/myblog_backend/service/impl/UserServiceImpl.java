@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import javax.print.DocFlavor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -150,6 +151,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 移除登录态
         request.getSession().removeAttribute(USER_LOGIN_STATE);
         return 1;
+    }
+
+    /**
+     * 设置中 更新用户的信息
+     *
+     * @param userName,email,avatarUrk,request
+     */
+    @Override
+    public User userSetting(Long userId,String userName,String email,String avatarUrk,HttpServletRequest request){
+        User currentUser = getById(userId);
+        if(!StringUtils.isAnyBlank(userName)){
+            currentUser.setUsername(userName);
+        }
+        if(!StringUtils.isAnyBlank(email)){
+            currentUser.setEmail(email);
+        }
+        if(!StringUtils.isAnyBlank(avatarUrk)){
+            currentUser.setAvatarUrl(avatarUrk);
+        }
+        boolean b= this.save(currentUser);
+        if(!b){
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "插入数据库失败");
+        }
+        return currentUser;
     }
 }
 
