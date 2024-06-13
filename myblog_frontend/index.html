@@ -24,6 +24,21 @@
 <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
 <!--[if lt IE 9]> <script type="text/javascript" src="js/modernizr.custom.js"></script> <![endif]-->
 <!-- /STYLES -->
+<style>
+  #scrollingText {
+      /* 设置字体样式 */
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 24px;
+  
+      /* 设置滚动字幕的样式 */
+      background-color: #effbf8;
+      color: #333333;
+      /* padding: 12px;
+      border: 2px solid #87a15b;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    }
+</style>
 
 </head>
 
@@ -76,8 +91,14 @@
 			<div class="mainpart_inner w-full min-h-[100vh] clear-both float-left relative">
 			
 				<!-- HOME -->
+				
 				<div class="elisc_tm_section animated" id="home">
+					<!-- <marquee  id="scrollingText" behavior="scroll" direction="right">
+					</marquee> -->
 					<div class="elisc_tm_home w-full min-h-[100vh] clear-both float-left bg-[#EFFBF8]">
+						<marquee  id="scrollingText" behavior="scroll" direction="right">
+							hello
+						</marquee>
 						<div class="tm_content w-full max-w-[1250px] h-auto clear-both my-0 mx-auto py-0 px-[20px]">
 							<div class="details w-full min-h-[100vh] flex items-center">
 								<div class="left w-1/2">
@@ -119,67 +140,10 @@
 											<a href="javascript:" onclick="logout()">登出</a>
 										</div>
 									</div>
-
-
-					
-                                <!-- <div x-data="{ toastVisible: false, toastTimer: null }">
-                                    <div class="bg-indigo-600/90 absolute top-5 left-5 z-50 text-white p-5 max-w-[350px] rounded-lg shadow-[0_0.25rem_1rem_rgba(161,172,184,.45)]" x-clock x-show="toastVisible" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-                                        <div class="flex gap-2 items-center relative mb-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentcolor" viewbox="0 0 256 256">
-                                                <path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
-                                            </svg>
-                                            <div class="text-[15px] font-semibold flex-1">Tailwind CSS</div>
-                                            <small>11 mins ago</small>
-                                            <button type="button" x-on:click="toastVisible = false" class="bg-indigo-600 absolute -top-8 -right-8 p-1.5 rounded-md shadow-[0_0.125rem_0.25rem_rgba(161,172,184,.4)]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
-                                                    <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="text-[15px]">Fruitcake chocolate bar tootsie roll gummies gummies jelly beans cake.</div>
-                                    </div>
-                                    <button class="btn border-indigo-100 bg-indigo-100 text-indigo-600 hover:border-indigo-600 hover:bg-indigo-600 hover:text-white" x-on:click="
-                                            if (toastVisible) {
-                                            clearTimeout(toastTimer);
-                                            toastTimer=setTimeout(() =>
-                                        toastVisible = false, 3000);
-                                        } else {
-                                        toastVisible = true;
-                                        toastTimer = setTimeout(() => toastVisible = false, 3000);
-                                        }">Top Left
-                                    </button> -->
-                
-						
-
 									<div class="info w-full float-left">
 										<ul class="relative">
 											<li>
-												<div x-data="{ toastVisible: false, toastTimer: null }">
-												    <div class="bg-indigo-600/90 absolute top-5 left-5 z-50 text-white p-5 max-w-[350px] rounded-lg shadow-[0_0.25rem_1rem_rgba(161,172,184,.45)]" x-clock x-show="toastVisible" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-												        <div class="flex gap-2 items-center relative mb-2">
-												            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentcolor" viewbox="0 0 256 256">
-												                <path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
-												            </svg>
-												            <div class="text-[15px] font-semibold flex-1">Tailwind CSS</div>
-												            <small>11 mins ago</small>
-												            <button type="button" x-on:click="toastVisible = false" class="bg-indigo-600 absolute -top-8 -right-8 p-1.5 rounded-md shadow-[0_0.125rem_0.25rem_rgba(161,172,184,.4)]">
-												                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
-												                    <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
-												                </svg>
-												            </button>
-												        </div>
-												        <div class="text-[15px]">Fruitcake chocolate bar tootsie roll gummies gummies jelly beans cake.</div>
-												    </div>
-												    <button class="btn border-indigo-100 bg-indigo-100 text-indigo-600 hover:border-indigo-600 hover:bg-indigo-600 hover:text-white" x-on:click="
-												            if (toastVisible) {
-												            clearTimeout(toastTimer);
-												            toastTimer=setTimeout(() =>
-												        toastVisible = false, 3000);
-												        } else {
-												        toastVisible = true;
-												        toastTimer = setTimeout(() => toastVisible = false, 3000);
-												        }">公告
-												    </button>
+
 											</li>
 										</ul>
 									</div>
@@ -397,6 +361,7 @@
 <script src="assets/js/init.js"></script>
 
 <script src="assets/js/alpine.min.js" defer></script>
+
 <script>
 	function checkLogin() {
 		fetch('http://localhost:8080/api/user/current', {
@@ -482,7 +447,29 @@
 				});
 	}
 	
+	function showAnnouncement() {
+	  fetch('http://localhost:8080/api/announcement/getAll')
+	    .then(response => response.json())
+	    .then(data => {
+	      const announcementList = data.data;
+	      let scrollingText = ""; // 声明一个空字符串用于存储所有公告内容
+	      announcementList.forEach(announcement => {
+	        const content = announcement.content;
+			const userId = announcement.userId;
+	        scrollingText += userId + " : " + content + "   "; // 将每个公告内容连接到字符串中，并添加一个空格分隔
+	      });
+			console.log(scrollingText);
+	      const marqueeElement = document.getElementById('scrollingText');
+	      marqueeElement.innerText = scrollingText; // 设置滚动字幕的文本内容，并去除首尾空格
+		  console.log(marqueeElement);
+	    })
+	    .catch(error => {
+	      // 处理请求错误
+	      console.error('Error:', error);
+	    });
+	}
 
+	document.addEventListener('DOMContentLoaded',showAnnouncement);
 	document.addEventListener('DOMContentLoaded', checkLogin);
 	document.addEventListener('DOMContentLoaded', loadUserInfo);
 </script>
