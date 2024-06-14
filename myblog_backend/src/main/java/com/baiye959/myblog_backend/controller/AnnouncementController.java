@@ -19,9 +19,9 @@ import static com.baiye959.myblog_backend.contant.UserContant.ADMIN_ROLE;
 import static com.baiye959.myblog_backend.contant.UserContant.USER_LOGIN_STATE;
 
 /**
- * 用户接口
+ * 公告接口
  *
- * @author Baiye959
+ * @author qiiiia
  */
 @RestController
 @RequestMapping("/announcement")
@@ -89,13 +89,13 @@ public class AnnouncementController {
 
     /**
      * 是否成功将公告删除
-     *
-     * @param id,request
-     * @return bool
+     * @param announcement
+     * @param request
+     * @return
      */
     @PostMapping("/delete")
     public BaseResponse<Boolean> deleteAnnouncement(@RequestBody  Announcement announcement, HttpServletRequest request) {
-        if(isAdmin(request)){
+        if(!isAdmin(request)){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         Long id = announcement.getId();
@@ -107,10 +107,7 @@ public class AnnouncementController {
     }
 
     @GetMapping("/getAll")
-    public BaseResponse<List<Announcement>> getAllAnnouncement(HttpServletRequest request) {
-        if(isAdmin(request)){
-            throw new BusinessException(ErrorCode.PARAMS_ERROR);
-        }
+    public BaseResponse<List<Announcement>> getAllAnnouncement() {
         List<Announcement> announcementList=announcementService.getAllAnnouncement();
         return ResultUtils.success(announcementList);
     }

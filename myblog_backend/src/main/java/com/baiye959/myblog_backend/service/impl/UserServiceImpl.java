@@ -170,7 +170,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if(!StringUtils.isAnyBlank(avatarUrk)){
             currentUser.setAvatarUrl(avatarUrk);
         }
-        boolean b= this.save(currentUser);
+
+        boolean b= this.updateById(currentUser);
         if(!b){
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "插入数据库失败");
         }
