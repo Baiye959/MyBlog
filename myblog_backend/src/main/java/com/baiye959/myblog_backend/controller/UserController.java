@@ -4,6 +4,7 @@ import com.baiye959.myblog_backend.common.BaseResponse;
 import com.baiye959.myblog_backend.common.ErrorCode;
 import com.baiye959.myblog_backend.common.ResultUtils;
 import com.baiye959.myblog_backend.exception.BusinessException;
+import com.baiye959.myblog_backend.model.domain.Announcement;
 import com.baiye959.myblog_backend.model.domain.User;
 import com.baiye959.myblog_backend.model.domain.request.UserLoginRequest;
 import com.baiye959.myblog_backend.model.domain.request.UserRegisterRequest;
@@ -64,8 +65,8 @@ public class UserController {
     }
 
     @PostMapping("/setting")
-    public BaseResponse<User> userLogin(@RequestBody User user, HttpServletRequest request){
-        if(user==null){
+    public BaseResponse<User> userSetting(@RequestBody User user, HttpServletRequest request){
+        if(user == null){
             throw new BusinessException(ErrorCode.PARAMS_ERROR,"用户信息为空");
         }
         String userName = user.getUsername();
@@ -123,13 +124,38 @@ public class UserController {
         return ResultUtils.success(users);
     }
 
+    @PostMapping("/update")
+    public BaseResponse<User> updateUser(@RequestBody User user, HttpServletRequest request) {
+        // 仅管理员可更改用户状态/权限
+        if (!isAdmin(request)) {
+            throw new BusinessException(ErrorCode.NO_AUTH,"无权限更改用户状态信息");
+        }
+
+        if(user == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "更改用户信息为空");
+        }
+        Integer userStatus = user.getUserStatus();
+        Integer userRole = user.getUserRole();
+        long userId = user.getId();
+
+        User newUser = userService.userUpdate(userId,userRole,userStatus,request);
+        return ResultUtils.success(newUser);
+    }
+
+    @GetMapping("/getAll")
+    public BaseResponse<List<User>> getAllUser() {
+        List<User> userList=userService.getAllUser();
+        return ResultUtils.success(userList);
+    }
+
     @PostMapping("/delete")
-    public BaseResponse<Boolean> deleteUser(@RequestBody long id, HttpServletRequest request) {
+    public BaseResponse<Boolean> deleteUser(@RequestBody User user, HttpServletRequest request) {
         // 仅管理员可删除
         if (!isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH);
         }
 
+        Long id = user.getId();
         if (id <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }

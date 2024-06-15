@@ -94,7 +94,7 @@ public class AnnouncementController {
      * @return
      */
     @PostMapping("/delete")
-    public BaseResponse<Boolean> deleteAnnouncement(@RequestBody  Announcement announcement, HttpServletRequest request) {
+    public BaseResponse<Boolean> deleteAnnouncement(@RequestBody Announcement announcement, HttpServletRequest request) {
         if(!isAdmin(request)){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }

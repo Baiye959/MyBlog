@@ -14,6 +14,67 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+
+    <style>
+        .model {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .model-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px; /* 圆边框 */
+            width: 50%;
+            height: 50%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .grid{
+            margin-bottom: 70px;
+            margin-top: 70px;
+        }
+        .blue-button {
+            /* text-decoration-color: black; */
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e0e7ff; /* 修改为你想要的淡蓝色 */
+            color: black;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .blue-button:hover {
+            background-color: #4f46e5; /* 修改为你想要的深蓝色 */
+        }
+    </style>
 </head>
 <body x-data="main" class="collapse-menu overflow-x-hidden bg-lightwhite font-public text-base font-normal text-slate-600 antialiased dark:bg-darkblue dark:text-indigo-300" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.fullscreen ? '' : '']">
 
@@ -172,11 +233,6 @@
                                         <option>50</option>
                                         <option>100</option>
                                     </select>
-                                    <a href="" type="button" class="btn gap-1 border-indigo-100 bg-indigo-100 text-indigo-600 hover:border-indigo-600 hover:bg-indigo-600 hover:text-white">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                            <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
-                                        </svg>Add New
-                                    </a>
                                 </div>
                                 <input type="text" class="form-input max-w-[16rem]" placeholder="Search...">
                             </div>
@@ -184,507 +240,61 @@
                                 <table class="min-w-[1200px]">
                                     <thead>
                                         <tr class="bg-gray-50 dark:bg-white/5 border-b border-gray-300 dark:border-white/10 text-sm">
-                                            <th class="w-20"><input type="checkbox" class="form-checkbox text-indigo-600" /></th>
                                             <th>
                                                 <div class="flex items-center gap-2">
                                                     #ID
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                        <path d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z"></path>
-                                                    </svg>
                                                 </div>
                                             </th>
                                             <th>
                                                 <div class="flex items-center gap-2">
                                                     Name
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                        <path d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z"></path>
-                                                    </svg>
                                                 </div>
                                             </th>
                                             <th>
                                                 <div class="flex items-center gap-2">
                                                     Email
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                        <path d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z"></path>
-                                                    </svg>
                                                 </div>
                                             </th>
                                             <th>
                                                 <div class="flex items-center gap-2">
-                                                    Date
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                        <path d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z"></path>
-                                                    </svg>
-                                                </div>
-                                            </th>
-                                            <th>
-                                                <div class="flex items-center gap-2">
-                                                    Amount
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                        <path d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z"></path>
-                                                    </svg>
+                                                    Role
                                                 </div>
                                             </th>
                                             <th>
                                                 <div class="flex items-center gap-2">
                                                     Status
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                        <path d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z"></path>
-                                                    </svg>
                                                 </div>
                                             </th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012345</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-2.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Kelly Young</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8df4e2f8e3eae6e8e1e1f4cde5e2f9e0ece4e1a3eee2e0">[email&#160;protected]</a></td>
-                                            <td>01 May 2023</td>
-                                            <td>$149.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-red-600 text-red-600">Pending</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012346</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-3.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Alexander Gray</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ccada0a9b48bbeadb5f8f4f4f48caba1ada5a0e2afa3a1">[email&#160;protected]</a></td>
-                                            <td>28 April 2023</td>
-                                            <td>$500.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-green-600 text-green-600">Paid</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012346</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-13.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Jean A. Anderson</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="baf0dfdbd4fbfbd4dedfc8c9d5d4fadedbc3c8dfca94d9d5d7">[email&#160;protected]</a></td>
-                                            <td>05 May 2023</td>
-                                            <td>$300.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-green-600 text-green-600">Paid</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012347</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-4.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Deborah N. Dees</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9cd8f9fef3eefdf4d2d8f9f9efdceef4e5e8fdb2fff3f1">[email&#160;protected]</a></td>
-                                            <td>15 April 2023</td>
-                                            <td>$245.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-green-600 text-green-600">Paid</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012348</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-5.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Javier J. Jones</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ace6cddac5c9dee6e6c3c2c9dfecc6c3d9dedecddcc5c8c982cfc3c1">[email&#160;protected]</a></td>
-                                            <td>4 May 2023</td>
-                                            <td>$189.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-red-600 text-red-600">Pending</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012349</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-6.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Charlotte G. Minarik</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6a29020b182703040b1803012a00051f18180b1a030e0f44090507">[email&#160;protected]</a></td>
-                                            <td>28 April 2023</td>
-                                            <td>$500.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-green-600 text-green-600">Paid</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012350</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-7.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Derrick T. Grassi</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9dd9f8efeff4fef6c9daeffceeeef4ddf7f2e8efeffcedf4f9f8b3fef2f0">[email&#160;protected]</a></td>
-                                            <td>03 May 2023</td>
-                                            <td>$400.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-green-600 text-green-600">Paid</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012451</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-8.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Joseph M. Bonetti</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e08a8f93859088828f8e85949489a094858c85978f928dce9593">[email&#160;protected]</a></td>
-                                            <td>25 April 2023</td>
-                                            <td>$375.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-green-600 text-green-600">Paid</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012452</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-9.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Denise G. Ragland</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b0f2e2522382e0c192a2c272a252f0b2f2a32392e3b65282426">[email&#160;protected]</a></td>
-                                            <td>06 May 2023</td>
-                                            <td>$189.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-green-600 text-green-600">Paid</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012453</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-10.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Ethel M. Young</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="97d2e3fff2fbdacef8e2f9f0d7f6e5faeee4e7eeb9f4f8fa">[email&#160;protected]</a></td>
-                                            <td>29 April 2023</td>
-                                            <td>$428.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-green-600 text-green-600">Paid</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012455</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-11.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Peter M. Hill</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3161544554437c79585d5d7143594845501f525e5c">[email&#160;protected]</a></td>
-                                            <td>08 May 2023</td>
-                                            <td>$19.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-green-600 text-green-600">Paid</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="form-checkbox text-indigo-600" /></td>
-                                            <td class><a href="preview.html" class="text-indigo-600">#012456</a></td>
-                                            <td class="whitespace-nowrap">
-                                                <div class="flex items-center gap-2">
-                                                    <img src="assets/img/avatar-12.png" class="h-8 w-8 flex-none rounded-full object-cover" alt="avatar">
-                                                    <p class="font-semibold">Luisa W. Cooks</p>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap"><a href="https://webonzer.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eea29b879d8fb9ad8181859dae9c86979a8fc08d8183">[email&#160;protected]</a></td>
-                                            <td>30 April 2023</td>
-                                            <td>$139.00</td>
-                                            <td class>
-                                                <span class="relative my-1 py-0.5 px-2 text-xs font-semibold rounded border border-green-600 text-green-600">Paid</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-center space-x-3 flex items-center">
-                                                    <button type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-blue-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button type="button" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
-                                                            <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="px-3 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
-                                <p class="text-gray-400">Showing 1 to 10 of 50 entries</p>
-                                <ul class="sm:ml-auto inline-flex items-center space-x-1 text-xs">
-                                    <li><button type="button" class="flex justify-center rounded bg-slate-200 px-2.5 py-2 text-slate-600 transition hover:bg-slate-300 dark:bg-slate-950/10 dark:text-white/60 dark:hover:bg-slate-950/50">Prev</button></li>
-                                    <li><button type="button" class="flex justify-center rounded bg-indigo-600 px-2.5 py-2 text-white transition dark:bg-lightindigo dark:text-white">1</button></li>
-                                    <li><button type="button" class="flex justify-center rounded bg-slate-200 px-2.5 py-2 text-slate-600 transition hover:bg-slate-300 dark:bg-slate-950/10 dark:text-white/60 dark:hover:bg-slate-950/50">2</button></li>
-                                    <li><button type="button" class="flex justify-center rounded bg-slate-200 px-2.5 py-2 text-slate-600 transition hover:bg-slate-300 dark:bg-slate-950/10 dark:text-white/60 dark:hover:bg-slate-950/50">3</button></li>
-                                    <li><button type="button" class="flex justify-center rounded bg-slate-200 px-2.5 py-2 text-slate-600 transition hover:bg-slate-300 dark:bg-slate-950/10 dark:text-white/60 dark:hover:bg-slate-950/50">4</button></li>
-                                    <li><button type="button" class="flex justify-center rounded bg-slate-200 px-2.5 py-2 text-slate-600 transition hover:bg-slate-300 dark:bg-slate-950/10 dark:text-white/60 dark:hover:bg-slate-950/50">5</button></li>
-                                    <li><button type="button" class="flex justify-center rounded bg-slate-200 px-2.5 py-2 text-slate-600 transition hover:bg-slate-300 dark:bg-slate-950/10 dark:text-white/60 dark:hover:bg-slate-950/50">Next</button></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
 
-                <footer class="flex flex-wrap items-center justify-center gap-3 px-4 pb-4 sm:justify-between">
-                    <p class="text-sm text-slate-400">&copy; 2023 made with By <a href="http://www.bootstrapmb.com">Reserved</a></p>
-                    <ul class="flex items-center text-sm text-slate-400">
-                        <li><a href="" class="px-2 py-1 transition-all duration-300 hover:text-black">About</a></li>
-                        <li><a href="" class="px-2 py-1 transition-all duration-300 hover:text-black">Support</a></li>
-                        <li><a href="" class="px-2 py-1 transition-all duration-300 hover:text-black">Contact Us</a></li>
-                    </ul>
-                </footer>
+                <div id="myModelUpdate" class="model">
+                    <div class="model-content">
+                        <span class="close" onclick="closeUpdateModel()">&times;</span>
+                        <h3>用户权限以及状态更改</h3>
+                        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                            <div>
+                                <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">role(0-默认用户 1-管理员)</label>
+                                <input type="number" class="form-input" id="role" placeholder="0-默认用户 1-管理员">
+                            </div>
+                            <div>
+                                <label class="text-xs uppercase text-gray-500 dark:text-indigo-300 font-medium mb-2 inline-block">status(0 - 正常)</label>
+                                <input type="number" class="form-input" id="status" placeholder="0 - 正常">
+                            </div>
+                        </div>
+
+                        <button class="blue-button" onclick="submitUpdateForm()" >submit</button>
+                    </div>
+                </div>
 
             </div>
 
@@ -692,7 +302,183 @@
     </div>
 
 
+    <script>
+        function openModel() {
+            document.getElementById("mymodel").style.display = "block";
+        }
 
+        function closeModel() {
+            document.getElementById("myModel").style.display = "none";
+        }
+        function closeUpdateModel(){
+            document.getElementById("myModelUpdate").style.display = "none";
+        }
+        function showUser(){
+
+            fetch('http://localhost:8080/api/user/getAll')
+                .then(response => response.json())
+                .then(data => {
+                    const announcementList = data.data;
+                    announcementList.forEach(user => {
+                        const id = user.id;
+                        const userName = user.username;
+                        const email = user.email;
+                        const role = user.userRole;
+                        const status = user.userStatus;
+
+                        var table = document.querySelector(".table-responsive table");
+                        var newRow = document.createElement("tr");
+
+                        // 创建第一个单元格
+                        var idCell = document.createElement("td");
+                        idCell.textContent = id;
+                        idCell.classList.add("idValue");
+                        newRow.appendChild(idCell);
+
+                        var userNameCell = document.createElement("td");
+                        userNameCell.textContent = userName;
+                        userNameCell.classList.add("userNameValue");
+                        newRow.appendChild(userNameCell);
+
+                        var userEmailCell = document.createElement("td");
+                        userEmailCell.textContent = email;
+                        userEmailCell.classList.add("userEmailCell");
+                        newRow.appendChild(userEmailCell);
+
+
+                        var userRoleCell = document.createElement("td");
+                        userRoleCell.textContent = role;
+                        userRoleCell.classList.add("userRoleCell");
+                        newRow.appendChild(userRoleCell);
+
+                        var userStatusCell = document.createElement("td");
+                        userStatusCell.textContent = status;
+                        userStatusCell.classList.add("userStatusCell");
+                        newRow.appendChild(userStatusCell);
+
+                        // 创建第三个单元格
+                        var actionsCell = document.createElement("td");
+                        actionsCell.innerHTML = `
+				      	<div class="text-center space-x-3 flex items-center">
+				      		<button onclick="updateUser()" type="button" aria-label="Edit" class="hover:text-indigo-600 transition-all duration-300">
+				      			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
+				      				<path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,120v88a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h88a8,8,0,0,1,0,16H48V208H208V120a8,8,0,0,1,16,0Z"></path>
+				      			</svg>
+				      		</button>
+				      		<button type="button" onclick="deleteUser()" aria-label="Delete" class="hover:text-red-600 transition-all duration-300">
+				      			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 256 256">
+				      				<path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path>
+				      			</svg>
+				      		</button>
+				      	</div>
+				      `;
+                        newRow.appendChild(actionsCell);
+                        console.log(newRow);
+                        var tbody = table.querySelector("tbody");
+
+                        tbody.appendChild(newRow);
+                    });
+                })
+                .catch(error => {
+                    // 处理请求错误
+                    console.error('Error:', error);
+                });
+        }
+
+        var idCell = null;
+        function updateUser(){
+            var button = event.target;
+
+            // 获取父元素的单元格
+            var parentCell = button.parentNode.parentNode.parentNode.parentNode.parentNode;
+            console.log(parentCell);
+
+            // 获取单元格中的内容元素
+            var roleElement = parentCell.querySelector(".userRoleCell");
+            var statusElement = parentCell.querySelector(".userStatusCell");
+            var idElement =  parentCell.querySelector(".idValue");
+            // 获取内容的值
+            var roleValue = roleElement.textContent;
+            var statusValue = statusElement.textContent;
+            idValue = idElement.textContent;
+            var roleArea = document.getElementById("role");
+            var statusArea = document.getElementById("status");
+            roleArea.value = roleValue;
+            statusArea.value = statusValue;
+            // 在控制台打印内容值
+            console.log("Content value:", roleValue + statusValue);
+            document.getElementById("myModelUpdate").style.display = "block";
+        }
+
+        function submitUpdateForm(){
+            var role = document.getElementById('role').value;
+            var status = document.getElementById('status').value;
+            console.log(status.type);
+            fetch('http://localhost:8080/api/user/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id:idValue,userRole:role,userStatus:status}),
+                credentials: 'include'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 0) {
+                        // alert("updateAnnoucement successful! ");
+                        // showAnnouncement();
+                        location.reload();
+                        closeUpdateModel();
+
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            closeModel();
+        }
+
+        function deleteUser(){
+            var button = event.target;
+
+            // 获取父元素的单元格
+            var parentCell = button.parentNode.parentNode.parentNode.parentNode.parentNode;
+            console.log(parentCell);
+
+            // 获取单元格中的内容元素
+            var idElement =  parentCell.querySelector(".idValue");
+            // 获取内容的值
+            idValue = idElement.textContent;
+            fetch('http://localhost:8080/api/user/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id:idValue}),
+                credentials: 'include'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 0) {
+                        location.reload();
+                        closeUpdateModel();
+
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        window.onload = function() {
+            // 在页面加载完成后执行的代码
+            showUser(); // 替换为您要执行的函数
+        };
+    </script>
     <script src="assets/js/alpine-collaspe.min.js"></script>
     <script src="assets/js/alpine-persist.min.js"></script>
     <script src="assets/js/alpine.min.js" defer></script>

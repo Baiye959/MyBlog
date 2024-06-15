@@ -4,6 +4,8 @@ import com.baiye959.myblog_backend.model.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 /**
  * 用户服务
  *
@@ -49,7 +51,19 @@ public interface UserService extends IService<User> {
     /**
      * 设置中 更新用户的信息
      *
-     * @param userId,userName,email,avatarUrk,request
+     * @param userId,userName,email,avatarUrl,request
      */
-    User userSetting(Long userId,String userName,String email,String avatarUrk,HttpServletRequest request);
+    User userSetting(Long userId,String userName,String email,String avatarUrl,HttpServletRequest request);
+
+    /**
+     * 管理员修改用户状态/权限
+     * @param userId
+     * @param userRole
+     * @param userStatus
+     * @param request
+     * @return
+     */
+    User userUpdate(Long userId, Integer userRole, Integer userStatus, HttpServletRequest request);
+
+    List<User> getAllUser();
 }

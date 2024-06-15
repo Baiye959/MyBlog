@@ -3,6 +3,7 @@ package com.baiye959.myblog_backend.service.impl;
 import com.baiye959.myblog_backend.common.ErrorCode;
 import com.baiye959.myblog_backend.exception.BusinessException;
 import com.baiye959.myblog_backend.mapper.UserMapper;
+import com.baiye959.myblog_backend.model.domain.Announcement;
 import com.baiye959.myblog_backend.model.domain.User;
 import com.baiye959.myblog_backend.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -15,13 +16,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.print.DocFlavor;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.baiye959.myblog_backend.contant.UserContant.USER_LOGIN_STATE;
 
 /**
- * @author 33835
+ * @author Baiye959
  * @description 针对表【user(用户)】的数据库操作Service实现
  * @createDate 2024-06-02 19:36:15
  */
@@ -156,10 +158,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     /**
      * 设置中 更新用户的信息
      *
-     * @param userName,email,avatarUrk,request
+     * @param userName,email,avatarUrl,request
      */
     @Override
-    public User userSetting(Long userId,String userName,String email,String avatarUrk,HttpServletRequest request){
+    public User userSetting(Long userId,String userName, String email, String avatarUrl,HttpServletRequest request){
         User currentUser = getById(userId);
         if(!StringUtils.isAnyBlank(userName)){
             currentUser.setUsername(userName);
@@ -167,15 +169,34 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if(!StringUtils.isAnyBlank(email)){
             currentUser.setEmail(email);
         }
-        if(!StringUtils.isAnyBlank(avatarUrk)){
-            currentUser.setAvatarUrl(avatarUrk);
+        if(!StringUtils.isAnyBlank(avatarUrl)){
+            currentUser.setAvatarUrl(avatarUrl);
         }
 
         boolean b= this.updateById(currentUser);
         if(!b){
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "插入数据库失败");
         }
-        return currentUser;
+        return getSafetyUser(currentUser);
+    }
+
+    @Override
+    public User userUpdate(Long userId, Integer userRole, Integer userStatus, HttpServletRequest request){
+        User currentUser = getById(userId);
+        currentUser.setUserStatus(userStatus);
+        currentUser.setUserRole(userRole);
+
+        boolean b= this.updateById(currentUser);
+        if(!b){
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "插入数据库失败");
+        }
+        return getSafetyUser(currentUser);
+    }
+
+    @Override
+    public List<User> getAllUser(){
+        List<User> users = userMapper.selectList(null);
+        return users;
     }
 }
 
