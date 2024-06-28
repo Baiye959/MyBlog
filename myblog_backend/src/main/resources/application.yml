@@ -4,9 +4,9 @@ spring:
   # DataSource Config
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/MyBlog
+    url: jdbc:mysql://localhost:3306/myblog
     username: root
-    password: Baiye959
+    password: XMUmysql1533
   # session失效时间
   session:
     timeout: 86400

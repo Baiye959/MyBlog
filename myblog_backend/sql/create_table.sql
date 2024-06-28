@@ -17,6 +17,7 @@ create table user
 create table blog(
      id bigint auto_increment primary key comment 'id',
      userId bigint comment '博客作者',
+     title varchar(100) null comment '博客标题',
      content varchar(10000) null comment '博客内容',
      createTime datetime default CURRENT_TIMESTAMP null comment '创建时间',
      updateTime datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '修改时间',
