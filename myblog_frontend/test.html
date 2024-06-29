@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>mkToHtmlDemo</title>
+
+		<!--引入样式文件-->
+		<link rel="stylesheet" href="editormd/css/editormd.preview.css" />
+
+		<!--引入js文件-->
+		<script src="editormd/examples/js/jquery.min.js"></script>
+		<script src="editormd/lib/marked.min.js"></script>
+		<script src="editormd/lib/prettify.min.js"></script>
+		<script src="editormd/lib/raphael.min.js"></script>
+		<script src="editormd/lib/underscore.min.js"></script>
+		<script src="editormd/lib/sequence-diagram.min.js"></script>
+		<script src="editormd/lib/flowchart.min.js"></script>
+		<script src="editormd/lib/jquery.flowchart.min.js"></script>
+		<script src="editormd/editormd.js"></script>
+
+	</head>
+
+	<body>
+		<h1>转换前</h1>
+		<textarea id="demo1" style="width:800px;height:150px;"></textarea>
+
+		<!--点击该按钮进行转换-->
+		<button onclick="mdToHtml();" type="button">点击转Html</button>
+
+		<h1>转换后</h1>
+
+		<!--在该div中展示-->
+		<div id="testEditorMdview">
+
+		</div>
+
+
+		<!--js开始-->
+		<script type="text/javascript">
+
+			function mdToHtml() {
+
+				//把id为testEditorMdview容器中的内容替换为<textarea id="appendTest"></textarea>
+				$("#testEditorMdview").html('<textarea id="appendTest"></textarea>');
+				var content = $("#demo1").val(); //获取需要转换的文本内容，赋值给appendTest
+				$("#appendTest").val(content);
+
+				//转换开始,第一个参数是上面的div的id
+				editormd.markdownToHTML("testEditorMdview", {
+					htmlDecode: "style,script,iframe",
+					taskList: true,
+					tex: true,
+					flowChart: true,
+					sequenceDiagram: true,
+				});
+			}
+		</script>
+		<!--js结束-->
+
+	</body>
+</html>
