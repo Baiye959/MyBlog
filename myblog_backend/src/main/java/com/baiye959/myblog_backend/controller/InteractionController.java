@@ -24,12 +24,13 @@ import static com.baiye959.myblog_backend.contant.UserContant.USER_LOGIN_STATE;
  * @author zzzduo
  */
 @RestController
-@RequestMapping("/intercation")
+@RequestMapping("/interaction")
 public class InteractionController {
 
     @Resource
     private CommentService commentService;
     private LikesService likesService;
+
 
     /**
      * 查询特定博客下的评论
@@ -85,21 +86,77 @@ public class InteractionController {
         return ResultUtils.success(c);
     }
 
+    /**
+     * 查询当前博文点赞数量
+     * @param blogId
+     * @return
+     */
     @GetMapping("/getLikesCount")
-    public Long getLikesCount(@RequestParam("id") Long blogId) {
-        long count = 1;     // 还没写
-        return count;
+    public BaseResponse<Long> getLikesCount(@RequestParam("id") Long blogId) {
+        long count = likesService.getLikesCount(blogId);
+        return ResultUtils.success(count);
     }
 
+    /**
+     * 判断当前用户是否已为该博文点赞，已点赞则返回true
+     * @param blogId
+     * @param request
+     * @return
+     */
+    @GetMapping("/isLike")
+    public BaseResponse<Boolean> isLike(@RequestParam("id") Long blogId, HttpServletRequest request) {
+        if (blogId <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User currentUser = (User) userObj;
+        if (currentUser == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        long userId = currentUser.getId();
+        boolean l = likesService.searchLike(userId, blogId);
+        return ResultUtils.success(l);
+    }
+
+    /**
+     * 点赞
+     * @param blogId
+     * @param request
+     * @return
+     */
     @PostMapping("/addLikes")
-    public BaseResponse<Long> addLikes(@RequestParam("id") long blogId, HttpServletRequest request){
-        // 还没写
-        return ResultUtils.success(blogId);
+    public BaseResponse<Boolean> addLikes(@RequestParam("id") long blogId, HttpServletRequest request){
+        if (blogId <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User currentUser = (User) userObj;
+        if (currentUser == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        long userId = currentUser.getId();
+        boolean result = likesService.addLike(userId, blogId);
+        return ResultUtils.success(result);
     }
 
+    /**
+     * 取消点赞
+     * @param blogId
+     * @param request
+     * @return
+     */
     @PostMapping("/cancelLikes")
     public BaseResponse<Boolean> cancelLikes(@RequestParam("id") long blogId, HttpServletRequest request) {
-        // 还没写
-        return ResultUtils.success(true);
+        if (blogId <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User currentUser = (User) userObj;
+        if (currentUser == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        long userId = currentUser.getId();
+        boolean result = likesService.cancelLike(userId, blogId);
+        return ResultUtils.success(result);
     }
 }

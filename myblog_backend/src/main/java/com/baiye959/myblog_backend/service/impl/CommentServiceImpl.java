@@ -4,7 +4,6 @@ import com.baiye959.myblog_backend.common.ErrorCode;
 import com.baiye959.myblog_backend.exception.BusinessException;
 import com.baiye959.myblog_backend.mapper.CommentMapper;
 import com.baiye959.myblog_backend.mapper.UserMapper;
-import com.baiye959.myblog_backend.model.domain.Blog;
 import com.baiye959.myblog_backend.model.domain.Comment;
 import com.baiye959.myblog_backend.model.domain.User;
 import com.baiye959.myblog_backend.model.domain.response.CommentResponse;
