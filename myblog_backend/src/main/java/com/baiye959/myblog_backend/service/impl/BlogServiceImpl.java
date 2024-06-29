@@ -4,7 +4,6 @@ import com.baiye959.myblog_backend.common.ErrorCode;
 import com.baiye959.myblog_backend.exception.BusinessException;
 import com.baiye959.myblog_backend.mapper.BlogMapper;
 import com.baiye959.myblog_backend.model.domain.Blog;
-import com.baiye959.myblog_backend.model.domain.User;
 import com.baiye959.myblog_backend.service.BlogService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

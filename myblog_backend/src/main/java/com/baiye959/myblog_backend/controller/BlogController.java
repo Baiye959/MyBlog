@@ -49,6 +49,11 @@ public class BlogController {
         return ResultUtils.success(blog);
     }
 
+    /**
+     * 管理员在管理博客界面查看所有博客
+     * @param request
+     * @return
+     */
     @GetMapping("/getAllBlog")
     public BaseResponse<List<Blog>> getAllBlog(HttpServletRequest request) {
         // 仅管理员可查看
@@ -59,6 +64,11 @@ public class BlogController {
         return ResultUtils.success(blogList);
     }
 
+    /**
+     * 用户在博客中心查看所有人的博客
+     * @param request
+     * @return
+     */
     @GetMapping("/getAllBlog2")
     public BaseResponse<List<Blog>> getAllBlog2(HttpServletRequest request) {
         List<Blog> blogList=blogService.getAllBlog();
@@ -66,7 +76,7 @@ public class BlogController {
     }
 
     @PostMapping("/addBlog")
-    public BaseResponse<Long> addABlog(@RequestBody BlogRequest blogRequest, HttpServletRequest request){
+    public BaseResponse<Long> addBlog(@RequestBody BlogRequest blogRequest, HttpServletRequest request){
         if (blogRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -104,8 +114,7 @@ public class BlogController {
     }
 
     @PostMapping("/deleteMyBlog")
-    public BaseResponse<Boolean> deleteMyBlog(@RequestBody Blog blog) {
-        Long id = blog.getId();
+    public BaseResponse<Boolean> deleteMyBlog(@RequestParam("id") Long id) {
         if (id <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -114,12 +123,11 @@ public class BlogController {
     }
 
     @PostMapping("/deleteOtherBlog")
-    public BaseResponse<Boolean> deleteOtherBlog(@RequestBody Blog blog, HttpServletRequest request) {
+    public BaseResponse<Boolean> deleteOtherBlog(@RequestParam("id") Long id, HttpServletRequest request) {
         // 仅管理员可删除
         if (!isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH);
         }
-        Long id = blog.getId();
         if (id <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
