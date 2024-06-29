@@ -43,6 +43,18 @@
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 			}
+			.custom-height {
+				height: 300px; /* 自定义高度 */
+			}
+			.custom-height img {
+				object-fit: cover;
+				height: 100%;
+				width: auto;
+			}
+			.owl-carousel .item {
+				display: inline-block;
+				width: auto;
+			}
 		</style>
 
 	</head>
@@ -84,7 +96,7 @@
 					<div class="menu scrollable w-full float-left">
 						<ul class="transition_link h-full flex items-center justify-center flex-col">
 							<li class="active mb-[15px]"><a href="#home">首页</a></li>
-							<li class="mb-[15px]"><a href="#portfolio">相册管理</a></li>
+							<li class="mb-[15px]"><a href="#portfolio">我的相册</a></li>
 							<li class="mb-[15px]"><a href="#news" id="news-link">博客中心</a></li>
 							<!-- <li><a href="list.html">后台</a></li> -->
 						</ul>
@@ -177,60 +189,58 @@
 							<div class="tm_content w-full max-w-[1250px] h-auto clear-both my-0 mx-auto py-0 px-[20px]">
 								<div class="elisc_tm_portfolio_title w-full float-left flex items-end justify-between">
 									<div class="elisc_tm_title w-auto float-left">
-										<span class="w-full float-left font-medium uppercase inline-block mb-[12px]">-
-											Projects</span>
-										<h3 class="text-[40px] font-extrabold">Recent completed works</h3>
-									</div>
-									<div class="buttons">
-										<a class="prev_button" href="#"><img class="svg" src="assets/img/svg/prev.svg"
-												alt="" /></a>
-										<a class="next_button" href="#"><img class="svg" src="assets/img/svg/next.svg"
-												alt="" /></a>
+										<h3 class="text-[40px] font-extrabold">我的相册</h3>
 									</div>
 								</div>
 								<div class="portfolio_list w-full float-left mt-[40px] mb-[120px]">
-									<ul class="owl-carousel gallery_zoom mb-[65px]">
-										<li>
-											<div class="list_inner">
-												<div class="image relative rounded-[4px] overflow-hidden mb-[25px]">
-													<img class="min-w-full relative opacity-0"
-														src="assets/img/thumbs/31-36.jpg" alt="" />
-													<div class="main absolute inset-0 bg-no-repeat bg-cover bg-center"
-														data-img-url="assets/img/portfolio/1.jpg"></div>
-													<a class="elisc_tm_full_link popup-youtube absolute inset-0 z-[5]"
-														href="https://www.youtube.com/watch?v=7e90gBu4pas"></a>
-												</div>
-												<div class="details w-full float-left">
-													<span class="category inline-block mb-[7px]"><a
-															class="inline-block uppercase text-[#55527C] font-medium"
-															href="#">Youtube</a></span>
-													<h3 class="title"><a
-															class="line_effect popup-youtube font-semibold text-[24px] text-[#130F49]"
-															href="https://www.youtube.com/watch?v=7e90gBu4pas">New
-															Technology</a></h3>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="list_inner">
-												<div class="image relative rounded-[4px] overflow-hidden mb-[25px]">
-													<img class="min-w-full relative opacity-0"
-														src="assets/img/thumbs/31-36.jpg" alt="" />
-													<div class="main absolute inset-0 bg-no-repeat bg-cover bg-center"
-														data-img-url="assets/img/portfolio/2.jpg"></div>
-													<a class="elisc_tm_full_link popup-vimeo absolute inset-0 z-[5]"
-														href="https://vimeo.com/337293658"></a>
-												</div>
-												<div class="details w-full float-left">
-													<span class="category inline-block mb-[7px]"><a
-															href="#">Vimeo</a></span>
-													<h3 class="title"><a class="line_effect popup-vimeo"
-															href="https://vimeo.com/337293658">Firogo Majestic Ltd.</a>
-													</h3>
-												</div>
-											</div>
-										</li>
+									<ul id="photoCarousel" class="owl-carousel gallery_zoom mb-[65px]">
+										<!-- 动态加载照片卡片 -->
 									</ul>
+									<script>
+										document.addEventListener('DOMContentLoaded', function() {
+											console.log('DOMContentLoaded event fired');
+											fetch('http://localhost:8080/api/photo/getMyPhoto', {
+												method: 'GET',
+												credentials: 'include'
+											})
+													.then(response => response.json())
+													.then(data => {
+														console.log('Data fetched:', data);
+														if (data.code === 0) {
+															const photos = data.data;
+															renderCarousel(photos);
+														} else {
+															alert('Failed to load photos: ' + data.message);
+														}
+													})
+													.catch(error => {
+														console.error('Error:', error);
+													});
+										});
+
+										function renderCarousel(photos) {
+											const photoCarousel = document.getElementById('photoCarousel');
+											console.log('photoCarousel:', photoCarousel);
+											if (!photoCarousel) {
+												console.error('photoCarousel element not found');
+												return;
+											}
+											photoCarousel.innerHTML = '';
+											photos.forEach(photo => {
+												const photoItem = `
+                    <li class="item">
+                        <div class="list_inner">
+                            <div class="image relative rounded-[4px] overflow-hidden mb-[25px] custom-height">
+                                <img class="relative" src="${photo.photoUrl}" alt="" />
+                                <a class="elisc_tm_full_link absolute inset-0 z-[5]" href="${photo.photoUrl}" data-lightbox="gallery"></a>
+                            </div>
+                        </div>
+                    </li>
+                `;
+												photoCarousel.innerHTML += photoItem;
+											});
+										}
+									</script>
 								</div>
 							</div>
 						</div>

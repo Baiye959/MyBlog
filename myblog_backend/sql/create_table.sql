@@ -52,3 +52,10 @@ create table announcement(
     updateTime datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '修改时间',
     FOREIGN KEY (userId) REFERENCES user(id) ON DELETE SET NULL
 ) comment '公告';
+
+CREATE TABLE IF NOT EXISTS photo (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    photoUrl VARCHAR(255) NOT NULL,
+    userId BIGINT,
+    FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
+);
