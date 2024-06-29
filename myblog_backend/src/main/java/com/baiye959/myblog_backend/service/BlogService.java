@@ -1,6 +1,7 @@
 package com.baiye959.myblog_backend.service;
 
 import com.baiye959.myblog_backend.model.domain.Blog;
+import com.baiye959.myblog_backend.model.domain.response.BlogResponse;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.time.LocalDateTime;
@@ -16,11 +17,11 @@ public interface BlogService extends IService<Blog> {
      * @param userId
      * @return
      */
-    List<Blog> getMyBlog(long userId);
+    List<BlogResponse> getMyBlog(long userId);
 
-    Blog getOneBlog(Long id);
+    BlogResponse getOneBlog(Long id);
 
-    List<Blog> getAllBlog();
+    List<BlogResponse> getAllBlog();
 
     Long addBlog(long userId, String title, String content, LocalDateTime time1, LocalDateTime time2);
 

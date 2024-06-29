@@ -7,6 +7,7 @@ import com.baiye959.myblog_backend.exception.BusinessException;
 import com.baiye959.myblog_backend.model.domain.Blog;
 import com.baiye959.myblog_backend.model.domain.User;
 import com.baiye959.myblog_backend.model.domain.request.BlogRequest;
+import com.baiye959.myblog_backend.model.domain.response.BlogResponse;
 import com.baiye959.myblog_backend.service.BlogService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,20 +33,20 @@ public class BlogController {
     private BlogService blogService;
 
     @GetMapping("/getMyBlog")
-    public BaseResponse<List<Blog>> getMyBlog(HttpServletRequest request) {
+    public BaseResponse<List<BlogResponse>> getMyBlog(HttpServletRequest request) {
         Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
         User currentUser = (User) userObj;
         if (currentUser == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         long userId = currentUser.getId();
-        List<Blog> blogList=blogService.getMyBlog(userId);
+        List<BlogResponse> blogList=blogService.getMyBlog(userId);
         return ResultUtils.success(blogList);
     }
 
     @GetMapping("/getOneBlog")
-    public BaseResponse<Blog> getOneBlog(@RequestParam("id") Long id) {
-        Blog blog=blogService.getOneBlog(id);
+    public BaseResponse<BlogResponse> getOneBlog(@RequestParam("id") Long id) {
+        BlogResponse blog=blogService.getOneBlog(id);
         return ResultUtils.success(blog);
     }
 
@@ -55,12 +56,12 @@ public class BlogController {
      * @return
      */
     @GetMapping("/getAllBlog")
-    public BaseResponse<List<Blog>> getAllBlog(HttpServletRequest request) {
+    public BaseResponse<List<BlogResponse>> getAllBlog(HttpServletRequest request) {
         // 仅管理员可查看
         if (!isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH);
         }
-        List<Blog> blogList=blogService.getAllBlog();
+        List<BlogResponse> blogList=blogService.getAllBlog();
         return ResultUtils.success(blogList);
     }
 
@@ -70,8 +71,8 @@ public class BlogController {
      * @return
      */
     @GetMapping("/getAllBlog2")
-    public BaseResponse<List<Blog>> getAllBlog2(HttpServletRequest request) {
-        List<Blog> blogList=blogService.getAllBlog();
+    public BaseResponse<List<BlogResponse>> getAllBlog2(HttpServletRequest request) {
+        List<BlogResponse> blogList=blogService.getAllBlog();
         return ResultUtils.success(blogList);
     }
 

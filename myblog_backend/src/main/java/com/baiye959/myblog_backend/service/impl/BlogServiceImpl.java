@@ -3,7 +3,10 @@ package com.baiye959.myblog_backend.service.impl;
 import com.baiye959.myblog_backend.common.ErrorCode;
 import com.baiye959.myblog_backend.exception.BusinessException;
 import com.baiye959.myblog_backend.mapper.BlogMapper;
+import com.baiye959.myblog_backend.mapper.UserMapper;
 import com.baiye959.myblog_backend.model.domain.Blog;
+import com.baiye959.myblog_backend.model.domain.User;
+import com.baiye959.myblog_backend.model.domain.response.BlogResponse;
 import com.baiye959.myblog_backend.service.BlogService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +31,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog>
 
     @Resource
     private BlogMapper blogMapper;
+    private UserMapper userMapper;
 
     /**
      * 查询自己的博客
@@ -35,16 +40,28 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog>
      * @return
      */
     @Override
-    public List<Blog> getMyBlog(long userId) {
+    public List<BlogResponse> getMyBlog(long userId) {
 
-        // 创建 LambdaQueryWrapper 对象
-        LambdaQueryWrapper<Blog> wrapper = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<Blog> blogWrapper = new LambdaQueryWrapper<>();
+        blogWrapper.eq(Blog::getUserId, userId);
+        List<Blog> blogs = blogMapper.selectList(blogWrapper);
 
-        // 添加查询条件
-        wrapper.eq(Blog::getUserId, userId);
+        LambdaQueryWrapper<User> userWrapper = new LambdaQueryWrapper<>();
+        userWrapper.eq(User::getId, userId);
+        User user = userMapper.selectOne(userWrapper);
 
-        List<Blog> blogs = blogMapper.selectList(wrapper);
-        return blogs;
+        List<BlogResponse> blogList = new ArrayList<>();
+        for(Blog blog : blogs) {
+            BlogResponse blogResponse = new BlogResponse();
+            blogResponse.setUser(user);
+            blogResponse.setId(blog.getId());
+            blogResponse.setTitle(blog.getTitle());
+            blogResponse.setContent(blog.getContent());
+            blogResponse.setCreateTime(blog.getCreateTime());
+            blogResponse.setUpdateTime(blog.getUpdateTime());
+            blogList.add(blogResponse);
+        }
+        return blogList;
     }
 
     /**
@@ -53,15 +70,25 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog>
      * @return
      */
     @Override
-    public Blog getOneBlog(Long id){
-        // 创建 LambdaQueryWrapper 对象
+    public BlogResponse getOneBlog(Long id){
+
         LambdaQueryWrapper<Blog> wrapper = new LambdaQueryWrapper<>();
-
-        // 添加查询条件
         wrapper.eq(Blog::getId, id);
-
         Blog blog = blogMapper.selectOne(wrapper);
-        return blog;
+
+        LambdaQueryWrapper<User> userWrapper = new LambdaQueryWrapper<>();
+        userWrapper.eq(User::getId, blog.getUserId());
+        User user = userMapper.selectOne(userWrapper);
+
+        BlogResponse blogResponse = new BlogResponse();
+        blogResponse.setId(blog.getId());
+        blogResponse.setTitle(blog.getTitle());
+        blogResponse.setContent(blog.getContent());
+        blogResponse.setCreateTime(blog.getCreateTime());
+        blogResponse.setUpdateTime(blog.getUpdateTime());
+        blogResponse.setUser(user);
+
+        return blogResponse;
     }
 
     /**
@@ -69,9 +96,26 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog>
      * @return
      */
     @Override
-    public List<Blog> getAllBlog() {
+    public List<BlogResponse> getAllBlog() {
         List<Blog> blogs = blogMapper.selectList(null);
-        return blogs;
+        List<BlogResponse> blogList = new ArrayList<>();
+
+        for(Blog blog : blogs) {
+            BlogResponse blogResponse = new BlogResponse();
+            blogResponse.setId(blog.getId());
+            blogResponse.setTitle(blog.getTitle());
+            blogResponse.setContent(blog.getContent());
+            blogResponse.setCreateTime(blog.getCreateTime());
+            blogResponse.setUpdateTime(blog.getUpdateTime());
+
+            LambdaQueryWrapper<User> userWrapper = new LambdaQueryWrapper<>();
+            userWrapper.eq(User::getId, blog.getUserId());
+            User user = userMapper.selectOne(userWrapper);
+            blogResponse.setUser(user);
+
+            blogList.add(blogResponse);
+        }
+        return blogList;
     }
 
     @Override
