@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html x-data="main" class :class="[$store.app.mode]">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Premium Tailwind CSS Admin & Dashboard Template" />
+		<meta name="author" content="SRBThemes" />
+
+		<title>MyBlog - Tailwind CSS Admin & Dashboard Template</title>
+
+
+
+		<link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
+		<link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+
+		<style>
+			body {
+				background: grey;
+			}
+
+			p {
+				font-size: 18px;
+			}
+
+			.likeIcon-wrap {
+				z-index: 5;
+				display: flex;
+				justify-content: flex-end;
+				margin-right: 20px;
+			}
+
+			.like-icon {
+				width: 25px;
+				height: 23px;
+				z-index: 7;
+				background: url("assets/img/love_white.jpg") no-repeat center;
+				background-size: 25px 23px;
+			}
+
+			.on {
+				background: url("assets/img/love_red.jpg") no-repeat center;
+				background-size: 25px 23px;
+			}
+		</style>
+
+	</head>
+	<body x-data="main"
+		class="collapse-menu overflow-x-hidden bg-lightwhite font-public text-base font-normal text-slate-600 antialiased dark:bg-darkblue dark:text-indigo-300"
+		:class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.fullscreen ? '' : '']">
+
+		<div x-cloak class="fixed inset-0 z-40 bg-slate-800/50 lg:hidden" :class="{'hidden' : !$store.app.sidebar}"
+			@click="$store.app.toggleSidebar()"></div>
+
+
+		<div class="">
+
+			<div class="space-y-6 pt-2 ml-4 mr-4">
+
+				<div id="header"></div> <!-- 容器用于装载组件 -->
+				<script>
+					// 动态加载HTML组件
+					fetch('header.html')
+						.then(response => response.text())
+						.then(html => {
+							document.getElementById('header').innerHTML = html;
+							// 需要执行的script文件名为'header.js'
+							const script = document.createElement('script');
+							script.src = 'header.js';
+							document.body.appendChild(script);
+						});
+					// document.addEventListener('DOMContentLoaded', loadUserInfo);
+					function logout() {
+						fetch('http://localhost:8080/api/user/logout', {
+								method: 'POST',
+								credentials: 'include'
+							})
+							.then(response => response.json())
+							.then(data => {
+								if (data.code === 0) {
+									sessionStorage.removeItem('user');
+									window.location.href = 'index.html';
+								} else {
+									alert(data.message);
+								}
+							})
+							.catch((error) => {
+								console.error('Error:', error);
+							});
+					}
+				</script>
+
+				<!--Container-->
+				<div class="bg-white container w-full md:max-w-3xl mx-auto pt-6">
+
+					<div class="w-full px-4 md:px-6 text-xl text-gray-800 leading-normal" style="">
+
+						<!--Title-->
+						<div class="font-sans mb-3 ml-2">
+							<h1 id="title"
+								class="font-bold font-sans break-normal text-gray-900 pb-2 text-3xl md:text-4xl">
+							</h1>
+
+							<div id="parent" class="relative flex items-center space-x-4 w-auto">
+								<div class="w-8 h-8">
+									<img class="rounded-full border border-gray-100 shadow-sm"
+										src="https://randomuser.me/api/portraits/women/81.jpg" alt="user image" />
+								</div>
+								<div class="flex flex-col space-y-1">
+									<p class="text-md md:text-base font-bold text-gray-600"></p>
+									<p class="text-sm md:text-base font-normal text-gray-600">Published 19
+										February 2019
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<hr align=center width=100% color=#987cb9 size=1>
+						<!--Lead Para-->
+						<div id="testEditorMdview">
+
+						</div>
+
+						<!--/ Post Content-->
+
+						<!-- like_icon -->
+						<div class="likeIcon-wrap py-6">
+							<div class="like-icon" data-key="on"></div>
+							<div class="like-num ml-2 text-sm">1</div>
+						</div>
+						<hr align=center width=100% color=#987cb9 size=1>
+
+
+						<!-- comment box -->
+
+						<form>
+							<div>
+								<div
+									class="flex items-center justify-between mt-2 px-3 py-2 border-b dark:border-gray-600">
+									<label for="message"
+										class="block mb-1 text-md font-medium text-gray-900 dark:text-white">Your
+										Comment</label>
+								</div>
+								<textarea id="message" rows="4"
+									class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="Write your thoughts here..."></textarea>
+							</div>
+							<div class="flex justify-end">
+								<button type="submit"
+									class="btn mt-4 mb-4 gap-1 border-indigo-100 bg-indigo-100 text-indigo-600 hover:border-indigo-600 hover:bg-indigo-600 hover:text-white">
+									Publish post
+								</button>
+							</div>
+
+						</form>
+
+						<!-- comment area -->
+						<ul class="comment_ulist" style="">
+							<li class="comment_line_box">
+								<hr align=center width=100% color=#987cb9 size=1>
+								<div class="py-6">
+									<div class="relative flex items-center space-x-4 w-auto">
+										<div class="w-12 h-12">
+											<img class="rounded-full border border-gray-100 shadow-sm"
+												src="https://randomuser.me/api/portraits/women/81.jpg"
+												alt="user image" />
+										</div>
+										<div class="flex flex-col space-y-1">
+											<p class="text-md md:text-base font-bold text-gray-600">user name</p>
+											<p class="text-sm md:text-base font-normal text-gray-600">19 February 2019
+											</p>
+										</div>
+									</div>
+									<div style="display: block; margin-top: 8px" class="comment">
+										<p>comment</p>
+									</div>
+								</div>
+							</li>
+							<li class="comment_line_box">
+								<hr align=center width=100% color=#987cb9 size=1>
+								<div class="py-6">
+									<div class="relative flex items-center space-x-4 w-auto">
+										<div class="w-12 h-12">
+											<img class="rounded-full border border-gray-100 shadow-sm"
+												src="https://randomuser.me/api/portraits/women/81.jpg"
+												alt="user image" />
+										</div>
+										<div class="flex flex-col space-y-1">
+											<p class="text-md md:text-base font-bold text-gray-600">user name</p>
+											<p class="text-sm md:text-base font-normal text-gray-600">19 February 2019
+											</p>
+										</div>
+									</div>
+									<div style="display: block; margin-top: 8px" class="comment">
+										<p>comment</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+
+			</div>
+
+
+			<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+			<script src="assets/js/alpine-collaspe.min.js"></script>
+			<script src="assets/js/alpine-persist.min.js"></script>
+			<script src="assets/js/alpine.min.js" defer></script>
+
+			<script src="assets/js/perfect-scrollbar.min.js"></script>
+
+			<script src="assets/js/custom.js"></script>
+
+			<!--引入样式文件-->
+			<link rel="stylesheet" href="editormd/css/editormd.preview.css" />
+
+			<!--引入js文件-->
+			<script src="editormd/examples/js/jquery.min.js"></script>
+			<script src="editormd/lib/marked.min.js"></script>
+			<script src="editormd/lib/prettify.min.js"></script>
+			<script src="editormd/lib/raphael.min.js"></script>
+			<script src="editormd/lib/underscore.min.js"></script>
+			<script src="editormd/lib/sequence-diagram.min.js"></script>
+			<script src="editormd/lib/flowchart.min.js"></script>
+			<script src="editormd/lib/jquery.flowchart.min.js"></script>
+			<script src="editormd/editormd.js"></script>
+
+			<script>
+				// 点赞动画
+				$(document).ready(function() {
+					// likeClickCount
+					$(".like-icon").on('click', function() {
+						likeClickCount();
+					})
+				})
+
+				function likeClickCount() {
+					//Number函数将对象的值转换成数字
+					var like_num = Number($('.like-num').html());
+					if ($('.like-icon').attr('data-key') == 'on') {
+						$('.like-icon').addClass('on');
+						// like-num add 
+						like_num = like_num + 1;
+						$('.like-num').html(like_num);
+						$('.like-icon').attr('data-key', '');
+					} else {
+						$('.like-icon').removeClass('on');
+						like_num = like_num - 1;
+						$('.like-num').html(like_num);
+						$('.like-icon').attr('data-key', 'on');
+					}
+				}
+
+				var id;
+				window.onload = function() {
+					// 在页面加载完成后执行的代码
+					var id = window.sessionStorage.getItem('id');
+					var title = window.sessionStorage.getItem('title');
+					var content = window.sessionStorage.getItem('content');
+					var userName = window.sessionStorage.getItem('userName');
+					var avatarUrl = window.sessionStorage.getItem('avatarUrl');
+					var time = window.sessionStorage.getItem('time');
+
+					console.log(userName);
+
+					//把id为testEditorMdview容器中的内容替换为<textarea id="appendTest"></textarea>
+					$("#testEditorMdview").html('<textarea id="appendTest"></textarea>');
+					$("#appendTest").val(content);
+
+					//转换开始,第一个参数是上面的div的id
+					editormd.markdownToHTML("testEditorMdview", {
+						htmlDecode: "style,script,iframe",
+						taskList: true,
+						tex: true,
+						flowChart: true,
+						sequenceDiagram: true,
+					});
+
+					// 将数据加载到 HTML 中
+					var titleText = document.getElementById('title');
+					titleText.textContent = title;
+
+					// 生成 HTML 内容
+					var html = `
+					<div class="w-12 h-12 mt-2">
+					  <img class="rounded-full border border-gray-100 shadow-sm" src="${avatarUrl}" alt="user image" />
+					</div>
+					<div class="flex flex-col space-y-1">
+					  <p class="text-sm md:text-base font-bold text-gray-600">${userName}</p>
+					  <p class="text-xs md:text-base font-normal text-gray-600">Published ${time}</p>
+					</div>
+					`;
+
+					// 获取目标元素并插入 HTML 内容
+					var targetElement = document.querySelector('#parent');
+					targetElement.innerHTML = html;
+				};
+			</script>
+
+	</body>
+</html>

@@ -77,7 +77,7 @@ public class InteractionController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         long userId = currentUser.getId();
-        boolean isMyComment = commentService.isMyComent(commentId, userId);
+        boolean isMyComment = commentService.isMyComment(commentId, userId);
         if (!isMyComment) {
             throw new BusinessException(ErrorCode.NO_AUTH);
         }

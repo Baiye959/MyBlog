@@ -11,16 +11,21 @@ import com.baiye959.myblog_backend.service.CommentService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@Slf4j
 public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
         implements CommentService {
 
     @Resource
     private CommentMapper commentMapper;
+    @Resource
     private UserMapper userMapper;
 
     /**
@@ -87,7 +92,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
      * @param userId
      * @return
      */
-    public boolean isMyComent(long commentId, long userId){
+    public boolean isMyComment(long commentId, long userId){
         LambdaQueryWrapper<Comment> commentWrapper = new LambdaQueryWrapper<>();
         commentWrapper.eq(Comment::getId, commentId);
         Comment comment = commentMapper.selectOne(commentWrapper);

@@ -31,6 +31,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog>
 
     @Resource
     private BlogMapper blogMapper;
+    @Resource
     private UserMapper userMapper;
 
     /**
@@ -53,8 +54,8 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog>
         List<BlogResponse> blogList = new ArrayList<>();
         for(Blog blog : blogs) {
             BlogResponse blogResponse = new BlogResponse();
-            blogResponse.setUser(user);
             blogResponse.setId(blog.getId());
+            blogResponse.setUser(user);
             blogResponse.setTitle(blog.getTitle());
             blogResponse.setContent(blog.getContent());
             blogResponse.setCreateTime(blog.getCreateTime());

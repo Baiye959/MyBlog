@@ -399,13 +399,15 @@
 					})
 					.then(data => {
 						const blogList = data.data;
+						console.log(blogList)
 						blogList.forEach(blog => {
 							const id = blog.id;
-							const userId = blog.userId;
+							const userId = blog.user.id;
 							const title = blog.title;
 							const content = blog.content;
 							const createTime = blog.createTime;
 							const updateTime = blog.updateTime;
+							console.log(blog.id);
 
 							var table = document.querySelector(".table-responsive table");
 							var newRow = document.createElement("tr");
@@ -515,6 +517,46 @@
 						window.sessionStorage.setItem('title', title);
 						window.sessionStorage.setItem('content', content);
 						window.location.href = "editors_update.html";
+					})
+					.catch((error) => {
+						console.error('Error:', error);
+					});
+			}
+			
+			function viewBlog() {
+				var button = event.target;
+			
+				// 获取父元素的单元格
+				var parentCell = button.parentNode.parentNode.parentNode.parentNode.parentNode;
+				console.log(parentCell);
+			
+				// 获取单元格中的内容元素
+				var idElement = parentCell.querySelector(".idValue");
+				// 获取内容的值
+				idValue = idElement.textContent;
+				fetch('http://localhost:8080/api/blog/getOneBlog?id=' + idValue, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					})
+					.then(response => response.json())
+					.then(data => {
+						const blog = data.data;
+						console.log(blog)
+						const id = blog.id;
+						const title = blog.title;
+						const content = blog.content;
+						const userName = blog.user.username;
+						const avatarUrl = blog.user.avatarUrl;
+						const time = blog.createTime.replace(/T/g, ' ');
+						window.sessionStorage.setItem('id', id);
+						window.sessionStorage.setItem('title', title);
+						window.sessionStorage.setItem('content', content);
+						window.sessionStorage.setItem('userName', userName);
+						window.sessionStorage.setItem('avatarUrl', avatarUrl);
+						window.sessionStorage.setItem('time', time);
+						window.location.href = "blog.html";
 					})
 					.catch((error) => {
 						console.error('Error:', error);
