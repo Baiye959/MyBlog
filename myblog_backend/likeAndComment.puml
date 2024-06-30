@@ -1,0 +1,58 @@
+@startuml
+
+class InteractionController {
+  - commentService: CommentService
+  - likesService: LikesService
+  --
+  + getComment(blogId: Long): BaseResponse<List<CommentResponse>>
+  + addComment(commentRequest: CommentRequest, request: HttpServletRequest): BaseResponse<Long>
+  + deleteComment(commentId: long, request: HttpServletRequest): BaseResponse<Boolean>
+  + getLikesCount(blogId: Long): BaseResponse<Long>
+  + isLike(blogId: Long, request: HttpServletRequest): BaseResponse<Boolean>
+  + addLikes(blogId: long, request: HttpServletRequest): BaseResponse<Boolean>
+  + cancelLikes(blogId: long, request: HttpServletRequest): BaseResponse<Boolean>
+}
+
+class CommentService {
+  + getComments(blogId: Long): List<CommentResponse>
+  + addComment(userId: long, blogId: long, content: String, time1: LocalDateTime): Long
+  + isMyComment(commentId: long, userId: long): boolean
+}
+
+class LikesService {
+  + searchLike(userId: long, blogId: Long): boolean
+  + getLikesCount(blogId: Long): long
+  + addLike(userId: long, blogId: long): boolean
+  + cancelLike(userId: long, blogId: long): boolean
+}
+
+class CommentRequest {
+  - blogId: long
+  - content: String
+}
+
+class CommentResponse {
+  // properties
+}
+
+class BaseResponse<T> {
+  + data: T
+  + code: int
+  + message: String
+}
+
+class User {
+  - id: Long
+}
+
+InteractionController --> CommentService
+InteractionController --> LikesService
+InteractionController --> CommentRequest
+InteractionController --> BaseResponse
+CommentService --|> IService
+LikesService --|> IService
+CommentService --> CommentResponse
+CommentRequest --> CommentResponse
+InteractionController --> User
+
+@enduml

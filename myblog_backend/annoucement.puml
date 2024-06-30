@@ -1,0 +1,53 @@
+@startuml
+
+class AnnouncementController {
+  - announcementService: AnnouncementService
+  - userService: UserService
+  --
+  + addAnnouncement(annoucement: Announcement, request: HttpServletRequest): BaseResponse<Long>
+  + updateAnnouncement(announcement: Announcement, request: HttpServletRequest): BaseResponse<Long>
+  + deleteAnnouncement(announcement: Announcement, request: HttpServletRequest): BaseResponse<Boolean>
+  + getAllAnnouncement(): BaseResponse<List<Announcement>>
+  - isAdmin(request: HttpServletRequest): boolean
+}
+
+class AnnouncementService {
+  + addAnnouncement(userId: Long, content: String): Long
+  + updateAnnouncement(id: Long, userId: Long, content: String): Long
+  + getAllAnnouncement(): List<Announcement>
+}
+
+class BaseService<T> {
+  + add(entity: T): T
+  + update(entity: T): T
+  + delete(id: Long): boolean
+}
+
+class BaseResponse<T> {
+  + data: T
+  + code: int
+  + message: String
+}
+
+class Announcement {
+  - id: Long
+  - content: String
+}
+
+class User {
+  - id: Long
+  - userRole: int
+}
+
+class UserService {
+  + getUser(id: Long): User
+}
+
+AnnouncementController --> AnnouncementService
+AnnouncementController --> UserService
+AnnouncementService --|> BaseService
+BaseResponse --* Announcement
+Announcement --* User
+AnnouncementService --* Announcement
+
+@enduml

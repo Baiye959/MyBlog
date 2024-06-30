@@ -1,0 +1,132 @@
+@startuml
+
+package com.baiye959.myblog_backend.controller {
+    class AnnouncementController {
+        - announcementService: AnnouncementService
+        - userService: UserService
+        + addAnnouncement(Announcement, HttpServletRequest): BaseResponse<Long>
+        + updateAnnouncement(Announcement, HttpServletRequest): BaseResponse<Long>
+        + deleteAnnouncement(Announcement, HttpServletRequest): BaseResponse<Boolean>
+        + getAllAnnouncement(): BaseResponse<List<Announcement>>
+        - isAdmin(HttpServletRequest): boolean
+    }
+
+    class BlogController {
+        - blogService: BlogService
+        + getMyBlog(HttpServletRequest): BaseResponse<List<BlogResponse>>
+        + getOneBlog(id: Long): BaseResponse<BlogResponse>
+        + getAllBlog(HttpServletRequest): BaseResponse<List<BlogResponse>>
+        + getAllBlog2(HttpServletRequest): BaseResponse<List<BlogResponse>>
+        + addBlog(BlogRequest, HttpServletRequest): BaseResponse<Long>
+        + updateBlog(BlogRequest, HttpServletRequest): BaseResponse<Long>
+        + deleteMyBlog(id: Long): BaseResponse<Boolean>
+        + deleteOtherBlog(id: Long, HttpServletRequest): BaseResponse<Boolean>
+        - isAdmin(HttpServletRequest): boolean
+    }
+
+    class CommonController {
+        - aliOssUtil: AliOssUtil
+        - photoService: PhotoService
+        + upload(MultipartFile, HttpServletRequest): BaseResponse<Long>
+    }
+
+    class InteractionController {
+        - commentService: CommentService
+        - likesService: LikesService
+        + getComment(blogId: Long): BaseResponse<List<CommentResponse>>
+        + addComment(CommentRequest, HttpServletRequest): BaseResponse<Long>
+        + deleteComment(id: Long, HttpServletRequest): BaseResponse<Boolean>
+        + getLikesCount(blogId: Long): BaseResponse<Long>
+        + isLike(blogId: Long, HttpServletRequest): BaseResponse<Boolean>
+        + addLikes(blogId: Long, HttpServletRequest): BaseResponse<Boolean>
+        + cancelLikes(blogId: Long, HttpServletRequest): BaseResponse<Boolean>
+    }
+
+    class PhotoController {
+        - photoService: PhotoService
+        + getMyPhoto(HttpServletRequest): BaseResponse<List<Photo>>
+        + deleteAnnouncement(id: Long, HttpServletRequest): BaseResponse<Boolean>
+    }
+
+    class UserController {
+        - userService: UserService
+        + userRegister(UserRegisterRequest): BaseResponse<Long>
+        + userLogin(UserLoginRequest, HttpServletRequest): BaseResponse<User>
+        + userSetting(User, HttpServletRequest): BaseResponse<User>
+        + userLogout(HttpServletRequest): BaseResponse<Integer>
+        + getCurrentUser(HttpServletRequest): BaseResponse<User>
+        + searchUsers(username: String, HttpServletRequest): BaseResponse<List<User>>
+        + updateUser(User, HttpServletRequest): BaseResponse<User>
+        + getAllUser(): BaseResponse<List<User>>
+        + deleteUser(User, HttpServletRequest): BaseResponse<Boolean>
+        - isAdmin(HttpServletRequest): boolean
+    }
+}
+
+package com.baiye959.myblog_backend.common {
+    class BaseResponse<T>
+    class ErrorCode
+    class ResultUtils
+}
+
+package com.baiye959.myblog_backend.exception {
+    class BusinessException
+}
+
+package com.baiye959.myblog_backend.model.domain {
+    class Announcement
+    class Blog
+    class Photo
+    class User
+}
+
+package com.baiye959.myblog_backend.model.domain.request {
+    class BlogRequest
+    class CommentRequest
+    class UserLoginRequest
+    class UserRegisterRequest
+}
+
+package com.baiye959.myblog_backend.model.domain.response {
+    class BlogResponse
+    class CommentResponse
+}
+
+package com.baiye959.myblog_backend.service {
+    class AnnouncementService
+    class BlogService
+    class CommentService
+    class LikesService
+    class PhotoService
+    class UserService
+}
+
+package com.baiye959.myblog_backend.utils {
+    class AliOssUtil
+}
+
+Announcement --> UserService
+Blog --> BlogService
+Photo --> PhotoService
+User --> UserService
+BlogRequest --> BlogService
+CommentRequest --> CommentService
+UserLoginRequest --> UserService
+UserRegisterRequest --> UserService
+BlogResponse --> BlogService
+CommentResponse --> CommentService
+BlogResponse --> BlogController
+CommentResponse --> InteractionController
+CommentRequest --> InteractionController
+UserRegisterRequest --> UserController
+UserLoginRequest --> UserController
+BlogRequest --> BlogController
+CommentRequest --> InteractionController
+CommentResponse --> InteractionController
+BlogRequest --> BlogController
+UserRegisterRequest --> UserController
+UserLoginRequest --> UserController
+CommentRequest --> InteractionController
+CommentResponse --> InteractionController
+
+@enduml

@@ -1,0 +1,110 @@
+@startuml
+
+class BaseResponse {
+    - code: int
+    - message: String
+    - data: T
+    + getCode(): int
+    + setCode(code: int): void
+    + getMessage(): String
+    + setMessage(message: String): void
+    + getData(): T
+    + setData(data: T): void
+}
+
+class ErrorCode {
+    + PARAMS_ERROR
+    + NULL_ERROR
+    + NO_AUTH
+}
+
+class ResultUtils {
+    + success(data: T): BaseResponse<T>
+}
+
+class BusinessException {
+    - errorCode: ErrorCode
+    + getErrorCode(): ErrorCode
+}
+
+class UserRegisterRequest {
+    + username: String
+    + userPassword: String
+    + email: String
+}
+
+class UserLoginRequest {
+    + email: String
+    + userPassword: String
+}
+
+class User {
+    - id: Long
+    - username: String
+    - avatarUrl: String
+    - userPassword: String
+    - email: String
+    - userStatus: Integer
+    - createTime: Date
+    - updateTime: Date
+    - isDelete: Integer
+    - userRole: Integer
+    + getId(): Long
+    + getUsername(): String
+    + getAvatarUrl(): String
+    + getUserPassword(): String
+    + getEmail(): String
+    + getUserStatus(): Integer
+    + getCreateTime(): Date
+    + getUpdateTime(): Date
+    + getIsDelete(): Integer
+    + getUserRole(): Integer
+    + setUsername(username: String): void
+    + setAvatarUrl(avatarUrl: String): void
+    + setUserPassword(userPassword: String): void
+    + setEmail(email: String): void
+    + setUserStatus(userStatus: Integer): void
+    + setCreateTime(createTime: Date): void
+    + setUpdateTime(updateTime: Date): void
+    + setIsDelete(isDelete: Integer): void
+    + setUserRole(userRole: Integer): void
+}
+
+class UserService {
+    + userRegister(username: String, email: String, userPassword: String): Long
+    + userLogin(email: String, userPassword: String, request: HttpServletRequest): User
+    + getSafetyUser(originUser: User): User
+    + userLogout(request: HttpServletRequest): Integer
+    + userSetting(userId: Long, userName: String, email: String, avatarUrl: String, request: HttpServletRequest): User
+    + userUpdate(userId: Long, userRole: Integer, userStatus: Integer, request: HttpServletRequest): User
+    + getAllUser(): List<User>
+}
+
+class UserController {
+    - userService: UserService
+    + userRegister(userRegisterRequest: UserRegisterRequest): BaseResponse<Long>
+    + userLogin(userLoginRequest: UserLoginRequest, request: HttpServletRequest): BaseResponse<User>
+    + userSetting(user: User, request: HttpServletRequest): BaseResponse<User>
+    + userLogout(request: HttpServletRequest): BaseResponse<Integer>
+    + getCurrentUser(request: HttpServletRequest): BaseResponse<User>
+    + searchUsers(username: String, request: HttpServletRequest): BaseResponse<List<User>>
+    + updateUser(user: User, request: HttpServletRequest): BaseResponse<User>
+    + getAllUser(): BaseResponse<List<User>>
+    + deleteUser(user: User, request: HttpServletRequest): BaseResponse<Boolean>
+    - isAdmin(request: HttpServletRequest): boolean
+}
+
+UserController --> UserService
+UserController --> UserRegisterRequest
+UserController --> UserLoginRequest
+UserController --> User
+UserController --> BaseResponse
+UserController --> BusinessException
+UserController --> HttpServletRequest
+
+BaseResponse --> ErrorCode
+ResultUtils --> BaseResponse
+
+User --> Date
+
+@enduml

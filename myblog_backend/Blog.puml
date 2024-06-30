@@ -1,0 +1,19 @@
+@startuml
+
+interface IService
+class Blog
+class BlogResponse
+interface BlogService {
+  +getMyBlog(long userId): List<BlogResponse>
+  +getOneBlog(Long id): BlogResponse
+  +getAllBlog(): List<BlogResponse>
+  +addBlog(long userId, String title, String content, LocalDateTime time1, LocalDateTime time2): Long
+  +updateBlog(long id, String title, String content, LocalDateTime time2): Long
+}
+
+IService <|.. BlogService
+Blog "1" --> "0..*" BlogResponse
+BlogService --> Blog
+BlogService --> BlogResponse
+
+@enduml

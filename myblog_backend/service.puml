@@ -1,0 +1,65 @@
+@startuml
+
+package "com.baiye959.myblog_backend.service" {
+
+    interface AnnouncementService {
+        +addAnnouncement(userId: Long, content: String): Long
+        +updateAnnouncement(id: Long, userId: Long, content: String): Long
+        +getAllAnnouncement(): List<Announcement>
+    }
+
+    interface BlogService {
+        +getMyBlog(userId: Long): List<BlogResponse>
+        +getOneBlog(id: Long): BlogResponse
+        +getAllBlog(): List<BlogResponse>
+        +addBlog(userId: Long, title: String, content: String, time1: LocalDateTime, time2: LocalDateTime): Long
+        +updateBlog(id: Long, title: String, content: String, time2: LocalDateTime): Long
+    }
+
+    interface CommentService {
+        +getComments(blogId: Long): List<CommentResponse>
+        +addComment(userId: Long, blogId: Long, content: String, time1: LocalDateTime): Long
+        +isMyComment(commentId: Long, userId: Long): boolean
+    }
+
+    interface LikesService {
+        +searchLike(userId: Long, blogId: Long): boolean
+        +getLikesCount(blogId: Long): long
+        +addLike(userId: Long, blogId: Long): boolean
+        +cancelLike(userId: Long, blogId: Long): boolean
+    }
+
+    interface PhotoService {
+        +addPhoto(userId: Long, photoUrl: String): Long
+        +getMyPhoto(userId: Long): List<Photo>
+    }
+
+    interface UserService {
+        +userRegister(username: String, email: String, userPassword: String): Long
+        +userLogin(email: String, userPassword: String, request: HttpServletRequest): User
+        +getSafetyUser(originUser: User): User
+        +userLogout(request: HttpServletRequest): Integer
+        +userSetting(userId: Long, userName: String, email: String, avatarUrl: String, request: HttpServletRequest): User
+        +userUpdate(userId: Long, userRole: Integer, userStatus: Integer, request: HttpServletRequest): User
+        +getAllUser(): List<User>
+    }
+
+    BlogService --> CommentService: <<use>>
+    BlogService --> LikesService: <<use>>
+    BlogService --> UserService: <<use>>
+    CommentService --> UserService: <<use>>
+    LikesService --> UserService: <<use>>
+    PhotoService --> UserService: <<use>>
+
+}
+
+AnnouncementService --> Announcement
+BlogService --> Blog
+BlogService --> BlogResponse
+CommentService --> Comment
+CommentService --> CommentResponse
+LikesService --> Likes
+PhotoService --> Photo
+UserService --> User
+
+@enduml

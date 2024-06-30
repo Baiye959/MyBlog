@@ -1,0 +1,73 @@
+@startuml
+
+
+package "com.baiye959.myblog_backend.model.domain" {
+    class Announcement {
+        - Long id
+        - Long userId
+        - String content
+        - Date createTime
+        - Date updateTime
+    }
+
+    class Blog {
+        - Long id
+        - Long userId
+        - String title
+        - String content
+        - LocalDateTime createTime
+        - LocalDateTime updateTime
+        - User user
+    }
+
+    class Comment {
+        - Long id
+        - String content
+        - LocalDateTime createTime
+        - Long userId
+        - User user
+        - Long blogId
+        - Blog blog
+    }
+
+    class Likes {
+        - Long userId
+        - Long blogId
+        - User user
+        - Blog blog
+    }
+
+    class User {
+        - Long id
+        - String username
+        - String avatarUrl
+        - String userPassword
+        - String email
+        - Integer userStatus
+        - Date createTime
+        - Date updateTime
+        - Integer isDelete
+        - Integer userRole
+        - List<Blog> blogs
+        - List<Comment> comments
+        - List<Likes> likes
+    }
+
+    class Photo {
+        - Long id
+        - String photoUrl
+        - Long userId
+        - User user
+    }
+}
+
+BlogResponse -- Blog : includes
+CommentResponse -- Comment : includes
+User -- Blog : owns
+User -- Comment : owns
+User -- Likes : owns
+User -- Photo : owns
+Blog -- Comment : has
+Likes -- Blog : likes
+
+@enduml
