@@ -59,3 +59,10 @@ CREATE TABLE IF NOT EXISTS photo (
     userId BIGINT,
     FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
 );
+
+ALTER TABLE blog ADD COLUMN title VARCHAR(100);
+
+ALTER TABLE comment
+DROP FOREIGN KEY comment_ibfk_1;
+alter table comment
+DROP COLUMN parentCommentId;

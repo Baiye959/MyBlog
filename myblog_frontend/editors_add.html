@@ -256,7 +256,7 @@
 				    headers: {
 				        'Content-Type': 'application/json',
 				    },
-				    body: JSON.stringify({ -1, title, content}),
+				    body: JSON.stringify({title: title,content: content}),
 				    credentials: 'include'
 				})
 				    .then(response => response.json())

@@ -11,7 +11,7 @@ public interface CommentService extends IService<Comment> {
 
     List<CommentResponse> getComments(Long blogId);
 
-    Long addComment(long userId, long blogId, long parentCommentId, String content, LocalDateTime time1);
+    Long addComment(long userId, long blogId,  String content, LocalDateTime time1);
 
     boolean isMyComment(long commentId, long userId);
 }

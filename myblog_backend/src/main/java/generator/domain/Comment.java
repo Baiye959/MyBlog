@@ -1,11 +1,10 @@
-package com.baiye959.myblog_backend.model.domain;
+package generator.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -30,22 +29,22 @@ public class Comment implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createtime;
 
     /**
      * 被评论的评论
      */
-//    private Long parentCommentId;
+    private Long parentcommentid;
 
     /**
      * 评论者
      */
-    private Long userId;
+    private Long userid;
 
     /**
      * 被评论文章
      */
-    private Long blogId;
+    private Long blogid;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

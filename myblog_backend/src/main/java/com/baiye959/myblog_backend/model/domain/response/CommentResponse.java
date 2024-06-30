@@ -14,9 +14,12 @@ public class CommentResponse {
 
     private LocalDateTime createTime;
 
-    private Long parentCommentId;
+//    private Long parentCommentId;
 
-    private User user;
+//    private User user;
+    private String username;
+
+    private String avatarUrl;
 
     private Long blogId;
 }

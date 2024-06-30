@@ -53,8 +53,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
             commentResponse.setId(comment.getId());
             commentResponse.setContent(comment.getContent());
             commentResponse.setCreateTime(comment.getCreateTime());
-            commentResponse.setParentCommentId(comment.getParentCommentId());
-            commentResponse.setUser(userInfo);
+//            commentResponse.setParentCommentId(comment.getParentCommentId());
+            commentResponse.setUsername(userInfo.getUsername());
+            commentResponse.setAvatarUrl(userInfo.getAvatarUrl());
             commentResponse.setBlogId(blogId);
             commentList.add(commentResponse);
         }
@@ -66,17 +67,16 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
      * 添加评论
      * @param userId
      * @param blogId
-     * @param parentCommentId
      * @param content
      * @param time1
      * @return
      */
     @Override
-    public Long addComment(long userId, long blogId, long parentCommentId, String content, LocalDateTime time1){
+    public Long addComment(long userId, long blogId, String content, LocalDateTime time1){
         Comment comment = new Comment();
         comment.setUserId(userId);
         comment.setBlogId(blogId);
-        comment.setParentCommentId(parentCommentId);
+//        comment.setParentCommentId(parentCommentId);
         comment.setContent(content);
         comment.setCreateTime(time1);
         boolean saveResult = this.save(comment);

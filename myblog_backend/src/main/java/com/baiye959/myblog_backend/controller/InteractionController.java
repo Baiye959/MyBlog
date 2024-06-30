@@ -55,13 +55,13 @@ public class InteractionController {
         }
         long userId = currentUser.getId();
         long blogId = commentRequest.getBlogId();
-        long parentCommentId = commentRequest.getParentCommentId();
+//        long parentCommentId = commentRequest.getParentCommentId();
         String content = commentRequest.getContent();
         LocalDateTime time1 = LocalDateTime.now();
         if (StringUtils.isAnyBlank(content)) {
             throw new BusinessException(ErrorCode.NULL_ERROR);
         }
-        Long result = commentService.addComment(userId, blogId, parentCommentId, content, time1);
+        Long result = commentService.addComment(userId, blogId, content, time1);
         return ResultUtils.success(result);
     }
 
