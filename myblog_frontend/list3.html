@@ -201,7 +201,7 @@
                 </script>
 
                 <div class="min-h-[calc(100vh-152px)] space-y-6 text-[15px]">
-                    <h2 class="mb-6 text-lg font-medium text-slate-600 dark:text-white">Invoice List</h2>
+                    <h2 class="mb-6 text-lg font-medium text-slate-600 dark:text-white">User List</h2>
                     <div class="grid grid-cols-1 mb-6">
                         <div class="rounded-lg bg-white shadow-3xl dark:bg-lightblue dark:shadow-black/10">
                             <div class="px-6 py-4 border-b border-gray-300 dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
@@ -216,7 +216,7 @@
                                 <input type="text" class="form-input max-w-[16rem]" placeholder="Search...">
                             </div>
                             <div class="table-responsive">
-                                <table class="min-w-[1200px]">
+                                <table class="min-w-[800px]">
                                     <thead>
                                         <tr class="bg-gray-50 dark:bg-white/5 border-b border-gray-300 dark:border-white/10 text-sm">
                                             <th>
@@ -324,14 +324,21 @@
                         userEmailCell.classList.add("userEmailCell");
                         newRow.appendChild(userEmailCell);
 
-
                         var userRoleCell = document.createElement("td");
-                        userRoleCell.textContent = role;
+						if(role === 1){
+							userRoleCell.textContent = "Admin";
+						}else{
+							userRoleCell.textContent = "Regular User";
+						}
                         userRoleCell.classList.add("userRoleCell");
                         newRow.appendChild(userRoleCell);
 
                         var userStatusCell = document.createElement("td");
-                        userStatusCell.textContent = status;
+						if(status === 1){
+							userStatusCell.textContent = "Abnormal";
+						}else{
+							userStatusCell.textContent = "Normal";
+						}
                         userStatusCell.classList.add("userStatusCell");
                         newRow.appendChild(userStatusCell);
 

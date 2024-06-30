@@ -28,10 +28,8 @@ CREATE TABLE `comment` (
     id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY comment 'id',
     content varchar(255) DEFAULT NULL comment '评论内容',
     createTime datetime default CURRENT_TIMESTAMP null comment '创建时间',
-    parentCommentId bigint DEFAULT NULL comment '被评论的评论',
     userId bigint comment '评论者',
     blogId bigint comment '被评论文章',
-    FOREIGN KEY (parentCommentId) REFERENCES comment(id) ON DELETE CASCADE,
     FOREIGN KEY (userId) REFERENCES user(id) ON DELETE SET NULL,
     FOREIGN KEY (blogId) REFERENCES blog(id) ON DELETE CASCADE
 ) comment '评论';
@@ -59,10 +57,3 @@ CREATE TABLE IF NOT EXISTS photo (
     userId BIGINT,
     FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
 );
-
-ALTER TABLE blog ADD COLUMN title VARCHAR(100);
-
-ALTER TABLE comment
-DROP FOREIGN KEY comment_ibfk_1;
-alter table comment
-DROP COLUMN parentCommentId;

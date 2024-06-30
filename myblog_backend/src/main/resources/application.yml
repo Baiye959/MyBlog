@@ -4,9 +4,9 @@ spring:
   # DataSource Config
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/MyBlog
+    url: jdbc:mysql://localhost:3306/myblog
     username: root
-    password: 122528
+    password: XMUmysql1533
   # session失效时间
   session:
     timeout: 86400
@@ -38,10 +38,10 @@ sky:
     endpoint: oss-cn-beijing.aliyuncs.com
 
     #创建AccessKey时记住的AccessKey ID
-    access-key-id: AccessKey ID
+    access-key-id: 111
 
     #创建AccessKey时记住的AccessKey Secret
-    access-key-secret: AccessKey Secret
+    access-key-secret: 222
 
     #创建bucket时自定义的bucket姓名
     bucket-name: myblog-baiye959

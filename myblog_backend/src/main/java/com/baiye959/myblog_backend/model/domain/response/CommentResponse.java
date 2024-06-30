@@ -14,9 +14,6 @@ public class CommentResponse {
 
     private LocalDateTime createTime;
 
-//    private Long parentCommentId;
-
-//    private User user;
     private String username;
 
     private String avatarUrl;
