@@ -1,8 +1,9 @@
 -- 添加评论
+DELIMITER //
 CREATE PROCEDURE addComment(
     IN p_userId BIGINT, 
     IN p_blogId BIGINT,
-    IN p_content VARCHAR(10000)
+    IN p_content VARCHAR(10000),
     OUT CommentId BIGINT
 )
 BEGIN
@@ -13,9 +14,14 @@ BEGIN
     END IF;
     
     SELECT LAST_INSERT_ID() AS CommentId;
-END;
+END//
+DELIMITER ;
 
+CALL addComment(@userId, @bogId, @content, @id);
+SELECT @id;
+-- --------------------------------------------------------------------------------------
 -- 删除评论
+DELIMITER //
 CREATE PROCEDURE deleteComment(
   IN p_commentId BIGINT, 
   IN p_userId BIGINT, 
@@ -36,20 +42,26 @@ BEGIN
   ELSE
     SET Result = FALSE;
   END IF;
-END
+END//
+DELIMITER ;
 
+CALL deleteComment(@id, @userId, @result);
+SELECT @result;
+-- -----------------------------------------------------------------------------
 -- 查询特定博客下评论（返回对应用户名，头像，评论内容和发布时间的视图）
 CREATE PROCEDURE getComment(
-  IN p_blogId BIGINT, 
+  IN p_blogId BIGINT
 )
 BEGIN
-    CREATE VIEW comment_view3(userName, avatarUrl, content, createTime)
+    CREATE VIEW comment_view(blogId, userName, avatarUrl, content, createTime)
     AS
-    SELECT u.username, u.avatarUrl, c.content, c.createTime
+    SELECT c.blogId, u.username, u.avatarUrl, c.content, c.createTime
     FROM comment c
     JOIN user u ON u.id = c.userId;
 
     SELECT userName, avatarUrl, content, createTime
     FROM comment_view
     WHERE blogId = p_blogId;
-END
+END;
+
+CALL getComment(@blogId);

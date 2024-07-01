@@ -1,4 +1,5 @@
 -- 注册新用户
+DELIMITER //
 CREATE PROCEDURE register(
     IN p_userName VARCHAR(256), 
     IN p_email VARCHAR(512),
@@ -39,12 +40,18 @@ BEGIN
     INSERT INTO user (username, userPassword, email)
     VALUES (p_userName, p_password, p_email);
     SELECT LAST_INSERT_ID() AS UserId;
-END
+END//
+DELIMITER ;
 
+CALL register(@userName, @email, @password, @id);
+SELECT @id;
+-- ------------------------------------------------------------------------------------------
 -- 用户登录
+DELIMITER //
 CREATE PROCEDURE login(
     IN p_email VARCHAR(512), 
-    IN p_password VARCHAR(512)
+    IN p_password VARCHAR(512),
+    OUT p_userId BIGINT
 )
 BEGIN
     DECLARE temp_userId INT;
@@ -66,16 +73,23 @@ BEGIN
     END IF;
     
     -- 不匹配则拒绝登录
-    IF temp_password != password THEN
+    IF temp_password != p_password THEN
         SIGNAL SQLSTATE '45002' SET MESSAGE_TEXT = '密码错误';
     END IF;
     
     -- 登录成功，返回用户信息
     CREATE VIEW user_view AS 
-    SELECT * FROM user WHERE id = p_userId;
-END;
+    SELECT * FROM user WHERE email = p_email;
 
+    SELECT id INTO p_userId FROM user WHERE email = p_email;
+END//
+DELIMITER ;
+
+CALL login(@email, @password, @id);
+SELECT @id;
+-- ------------------------------------------------------------------
 -- 修改用户信息
+DELIMITER //
 CREATE PROCEDURE setUser(
     IN p_userId BIGINT,
     IN p_userName VARCHAR(256),
@@ -88,14 +102,17 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '请输入修改信息';
     ELSE
         UPDATE user
-        SET username = p_userName, email = p_email, password = p_password, avatarUrl = p_avatarUrl
+        SET username = p_userName, email = p_email, userPassword = p_password, avatarUrl = p_avatarUrl
         WHERE id = p_userId;
 
         CREATE VIEW user_view AS 
         SELECT * FROM user WHERE id = p_userId;
     END IF;
-END
+END//
+DELIMITER ;
 
+CALL setUser(@userId, @userName, @email, @password, @url);
+-- --------------------------------------------------------------------------------------------------
 -- 更新用户状态
 CREATE PROCEDURE updateUser(
     IN p_userId BIGINT,
@@ -109,9 +126,10 @@ BEGIN
 
     CREATE VIEW user_view AS 
     SELECT * FROM user WHERE id = p_userId;
-END
-
+END;
+-- -------------------------------------------------------------------------------
 -- 删除用户
+DELIMITER //
 CREATE PROCEDURE deleteUser(
     IN p_userId BIGINT, 
     OUT Result BOOLEAN
@@ -132,8 +150,12 @@ BEGIN
     ELSE
         SET Result = FALSE;
     END IF;
-END
+END//
+DELIMITER ;
 
+CALL deleteUser(@userId, @result);
+SELECT @result;
+-- -------------------------------------------------------------
 -- 查询所有用户（视图）
 CREATE VIEW user_view AS
 SELECT * FROM user;
