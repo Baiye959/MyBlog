@@ -1,19 +1,101 @@
 @startuml
 
-interface IService
-class Blog
-class BlogResponse
-interface BlogService {
-  +getMyBlog(long userId): List<BlogResponse>
-  +getOneBlog(Long id): BlogResponse
-  +getAllBlog(): List<BlogResponse>
-  +addBlog(long userId, String title, String content, LocalDateTime time1, LocalDateTime time2): Long
-  +updateBlog(long id, String title, String content, LocalDateTime time2): Long
+package "com.baiye959.myblog_backend.controller" {
+    class BlogController {
+        - BlogService blogService
+        + getMyBlog(HttpServletRequest): BaseResponse<List<BlogResponse>>
+        + getOneBlog(id: Long): BaseResponse<BlogResponse>
+        + getAllBlog(HttpServletRequest): BaseResponse<List<BlogResponse>>
+        + getAllBlog2(HttpServletRequest): BaseResponse<List<BlogResponse>>
+        + addBlog(blogRequest: BlogRequest, request: HttpServletRequest): BaseResponse<Long>
+        + updateABlog(blogRequest: BlogRequest, request: HttpServletRequest): BaseResponse<Long>
+        + deleteMyBlog(id: Long): BaseResponse<Boolean>
+        + deleteOtherBlog(id: Long, request: HttpServletRequest): BaseResponse<Boolean>
+        + isAdmin(request: HttpServletRequest): boolean
+    }
 }
 
-IService <|.. BlogService
-Blog "1" --> "0..*" BlogResponse
-BlogService --> Blog
-BlogService --> BlogResponse
+package "com.baiye959.myblog_backend.model.domain" {
+    class Blog {
+        - Long id
+        - String title
+        - String content
+        - Long userId
+        - LocalDateTime createTime
+        - LocalDateTime updateTime
+    }
+
+    class User {
+        - Long id
+        - String username
+        - String avatarUrl
+        - String userPassword
+        - String email
+        - Integer userStatus
+        - Date createTime
+        - Date updateTime
+        - Integer isDelete
+        - Integer userRole
+    }
+
+    class BlogRequest {
+        - Long id
+        - String title
+        - String content
+    }
+
+    class BlogResponse {
+        - Long id
+        - User user
+        - String title
+        - String content
+        - LocalDateTime createTime
+        - LocalDateTime updateTime
+    }
+
+    class Photo {
+        - Long id
+        - String photoUrl
+        - Long userId
+    }
+}
+
+package "com.baiye959.myblog_backend.service.impl" {
+    class BlogServiceImpl {
+        - BlogMapper blogMapper
+        - UserMapper userMapper
+        + getMyBlog(userId: long): List<BlogResponse>
+        + getOneBlog(id: Long): BlogResponse
+        + getAllBlog(): List<BlogResponse>
+        + addBlog(userId: long, title: String, content: String, time1: LocalDateTime, time2: LocalDateTime): Long
+        + updateBlog(id: long, title: String, content: String, time2: LocalDateTime): Long
+    }
+}
+
+package "com.baiye959.myblog_backend.service" {
+    interface BlogService {
+        + getMyBlog(userId: long): List<BlogResponse>
+        + getOneBlog(id: Long): BlogResponse
+        + getAllBlog(): List<BlogResponse>
+        + addBlog(userId: long, title: String, content: String, time1: LocalDateTime, time2: LocalDateTime): Long
+        + updateBlog(id: long, title: String, content: String, time2: LocalDateTime): Long
+    }
+
+    interface PhotoService {
+        + addPhoto(userId: Long, photoUrl: String): Long
+        + getMyPhoto(userId: long): List<Photo>
+    }
+}
+
+BlogController --> BlogService
+BlogServiceImpl --> BlogMapper
+BlogServiceImpl --> UserMapper
+BlogServiceImpl --> BlogService
+
+Blog --> User
+BlogRequest --> Blog
+BlogResponse --> User
+
+PhotoService --> Photo
 
 @enduml

@@ -1,53 +1,62 @@
 @startuml
 
-class AnnouncementController {
-  - announcementService: AnnouncementService
-  - userService: UserService
-  --
-  + addAnnouncement(annoucement: Announcement, request: HttpServletRequest): BaseResponse<Long>
-  + updateAnnouncement(announcement: Announcement, request: HttpServletRequest): BaseResponse<Long>
-  + deleteAnnouncement(announcement: Announcement, request: HttpServletRequest): BaseResponse<Boolean>
-  + getAllAnnouncement(): BaseResponse<List<Announcement>>
-  - isAdmin(request: HttpServletRequest): boolean
+package "com.baiye959.myblog_backend.controller" {
+    class AnnouncementController {
+        - AnnouncementService announcementService
+        - UserService userService
+        + addAnnouncement(annoucement: Announcement, request: HttpServletRequest): BaseResponse<Long>
+        + updateAnnouncement(announcement: Announcement, request: HttpServletRequest): BaseResponse<Long>
+        + deleteAnnouncement(announcement: Announcement, request: HttpServletRequest): BaseResponse<Boolean>
+        + getAllAnnouncement(): BaseResponse<List<Announcement>>
+        - isAdmin(request: HttpServletRequest): boolean
+    }
 }
 
-class AnnouncementService {
-  + addAnnouncement(userId: Long, content: String): Long
-  + updateAnnouncement(id: Long, userId: Long, content: String): Long
-  + getAllAnnouncement(): List<Announcement>
+package "com.baiye959.myblog_backend.model.domain" {
+    class Announcement {
+        - Long id
+        - Long userId
+        - String content
+        - Date createTime
+        - Date updateTime
+    }
+
+    class User {
+        - Long id
+        - String username
+        - String avatarUrl
+        - String userPassword
+        - String email
+        - Integer userStatus
+        - Date createTime
+        - Date updateTime
+        - Integer isDelete
+        - Integer userRole
+    }
 }
 
-class BaseService<T> {
-  + add(entity: T): T
-  + update(entity: T): T
-  + delete(id: Long): boolean
+package "com.baiye959.myblog_backend.service.impl" {
+    class AnnouncementServiceImpl {
+        - AnnouncementMapper announcementMapper
+        + addAnnouncement(userId: Long, content: String): Long
+        + updateAnnouncement(id: Long, userId: Long, content: String): Long
+        + getAllAnnouncement(): List<Announcement>
+    }
 }
 
-class BaseResponse<T> {
-  + data: T
-  + code: int
-  + message: String
-}
-
-class Announcement {
-  - id: Long
-  - content: String
-}
-
-class User {
-  - id: Long
-  - userRole: int
-}
-
-class UserService {
-  + getUser(id: Long): User
+package "com.baiye959.myblog_backend.service" {
+    interface AnnouncementService {
+        + addAnnouncement(userId: Long, content: String): Long
+        + updateAnnouncement(id: Long, userId: Long, content: String): Long
+        + getAllAnnouncement(): List<Announcement>
+    }
 }
 
 AnnouncementController --> AnnouncementService
 AnnouncementController --> UserService
-AnnouncementService --|> BaseService
-BaseResponse --* Announcement
-Announcement --* User
-AnnouncementService --* Announcement
+AnnouncementServiceImpl --> AnnouncementMapper
+AnnouncementServiceImpl --> AnnouncementService
+
+Announcement --> User
 
 @enduml

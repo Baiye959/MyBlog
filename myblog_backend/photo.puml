@@ -1,0 +1,50 @@
+@startuml
+
+package "com.baiye959.myblog_backend.controller" {
+    class PhotoController {
+        -PhotoService photoService
+        +BaseResponse<List<Photo>> getMyPhoto(HttpServletRequest request)
+        +BaseResponse<Boolean> deleteAnnouncement(@RequestBody Long id, HttpServletRequest request)
+    }
+}
+
+package "com.baiye959.myblog_backend.model.domain" {
+    class Photo {
+        -Long id
+        -String photoUrl
+        -Long userId
+    }
+
+    class User {
+        -Long id
+        -String username
+        -String avatarUrl
+        -String userPassword
+        -String email
+        -Integer userStatus
+        -Date createTime
+        -Date updateTime
+        -Integer isDelete
+        -Integer userRole
+    }
+}
+
+package "com.baiye959.myblog_backend.service" {
+    interface PhotoService {
+        +Long addPhoto(Long userId, String photoUrl)
+        +List<Photo> getMyPhoto(long userId)
+    }
+}
+
+package "com.baiye959.myblog_backend.service.impl" {
+    class PhotoServiceImpl {
+        +Long addPhoto(Long userId, String photoUrl)
+        +List<Photo> getMyPhoto(long userId)
+    }
+}
+
+PhotoController --> PhotoService : dependency
+PhotoService --> Photo : uses
+PhotoService --> PhotoServiceImpl : implements
+
+@enduml

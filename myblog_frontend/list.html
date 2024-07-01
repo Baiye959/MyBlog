@@ -549,7 +549,7 @@
 				var idElement = parentCell.querySelector(".idValue");
 				// 获取内容的值
 				idValue = idElement.textContent;
-				fetch('http://localhost:8080/api/blog/deleteMyBlog', {
+				fetch('http://localhost:8080/api/blog/deleteMyBlog?id=' + idValue, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
