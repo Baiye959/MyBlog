@@ -33,11 +33,6 @@ public class Comment implements Serializable {
     private LocalDateTime createTime;
 
     /**
-     * 被评论的评论
-     */
-//    private Long parentCommentId;
-
-    /**
      * 评论者
      */
     private Long userId;

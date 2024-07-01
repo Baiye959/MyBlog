@@ -53,7 +53,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
             commentResponse.setId(comment.getId());
             commentResponse.setContent(comment.getContent());
             commentResponse.setCreateTime(comment.getCreateTime());
-//            commentResponse.setParentCommentId(comment.getParentCommentId());
             commentResponse.setUsername(userInfo.getUsername());
             commentResponse.setAvatarUrl(userInfo.getAvatarUrl());
             commentResponse.setBlogId(blogId);
@@ -76,7 +75,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
         Comment comment = new Comment();
         comment.setUserId(userId);
         comment.setBlogId(blogId);
-//        comment.setParentCommentId(parentCommentId);
         comment.setContent(content);
         comment.setCreateTime(time1);
         boolean saveResult = this.save(comment);

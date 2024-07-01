@@ -29,6 +29,7 @@ public class InteractionController {
 
     @Resource
     private CommentService commentService;
+    @Resource
     private LikesService likesService;
 
 

@@ -140,7 +140,7 @@
                 </script>
 
                 <div class="min-h-[calc(100vh-152px)] space-y-6 text-[15px]">
-                    <h2 class="mb-6 text-lg font-medium text-slate-600 dark:text-white">Invoice List</h2>
+                    <h2 class="mb-6 text-lg font-medium text-slate-600 dark:text-white">All User's Blog List</h2>
                     <div class="grid grid-cols-1 mb-6">
                         <div class="rounded-lg bg-white shadow-3xl dark:bg-lightblue dark:shadow-black/10">
                             <div class="px-6 py-4 border-b border-gray-300 dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
@@ -162,55 +162,31 @@
                                 			<th>
                                 				<div class="flex items-center gap-2">
                                 					#ID
-                                					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                						fill="currentColor" viewbox="0 0 256 256">
-                                						<path
-                                							d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z">
-                                						</path>
-                                					</svg>
                                 				</div>
                                 			</th>
                                 			<th>
                                 				<div class="flex items-center gap-2">
                                 					User ID
-                                					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                						fill="currentColor" viewbox="0 0 256 256">
-                                						<path
-                                							d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z">
-                                						</path>
-                                					</svg>
                                 				</div>
                                 			</th>
+											<th>
+												<div class="flex items-center gap-2">
+													User Name
+												</div>
+											</th>
                                 			<th>
                                 				<div class="flex items-center gap-2">
                                 					Title
-                                					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                						fill="currentColor" viewbox="0 0 256 256">
-                                						<path
-                                							d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z">
-                                						</path>
-                                					</svg>
                                 				</div>
                                 			</th>
                                 			<th>
                                 				<div class="flex items-center gap-2">
                                 					Create Time
-                                					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                						fill="currentColor" viewbox="0 0 256 256">
-                                						<path
-                                							d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z">
-                                						</path>
-                                					</svg>
                                 				</div>
                                 			</th>
                                 			<th>
                                 				<div class="flex items-center gap-2">
                                 					Update Time
-                                					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                						fill="currentColor" viewbox="0 0 256 256">
-                                						<path
-                                							d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z">
-                                						</path>
                                 					</svg>
                                 				</div>
                                 			</th>
@@ -218,37 +194,7 @@
                                 		</tr>
                                 	</thead>
                                 	<tbody>
-                                		<tr>
-                                			<td class><a href="preview.html" class="text-indigo-600">#012345</a>
-                                			</td>
-                                			<td>01</td>
-                                			<td>test title</td>
-                                			<td>01 May 2023</td>
-                                			<td>01 May 2023</td>
-                                			<td>
-                                				<div class="text-center space-x-3 flex items-center">
-                                					<button type="button" aria-label="View"
-                                						class="hover:text-blue-600 transition-all duration-300">
-                                						<svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                							height="20" fill="currentColor" viewbox="0 0 256 256">
-                                							<path
-                                								d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z">
-                                							</path>
-                                						</svg>
-                                					</button>
-                                					<button type="button" aria-label="Delete"
-                                						class="hover:text-red-600 transition-all duration-300">
-                                						<svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                							height="20" fill="currentColor" viewbox="0 0 256 256">
-                                							<path
-                                								d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z">
-                                							</path>
-                                						</svg>
-                                					</button>
-                                				</div>
-                                			</td>
-                                		</tr>
-                                
+                                		
                                 	</tbody>
                                 </table>
                             </div>
@@ -309,11 +255,12 @@
 					const announcementList = data.data;
 					announcementList.forEach(blog => {
 						const id = blog.id;
-						const userId = blog.userId;
+						const userId = blog.user.id;
+						const userName = blog.user.username;
 						const title = blog.title;
 						const content = blog.content;
-						const createTime = blog.createTime;
-						const updateTime = blog.updateTime;
+						const createTime = blog.createTime.replace(/T/g, ' ');
+						const updateTime = blog.updateTime.replace(/T/g, ' ');
 	
 						var table = document.querySelector(".table-responsive table");
 						var newRow = document.createElement("tr");
@@ -328,6 +275,11 @@
 						userIdCell.textContent = userId;
 						userIdCell.classList.add("userIdValue");
 						newRow.appendChild(userIdCell);
+						
+						var userNameCell = document.createElement("td");
+						userNameCell.textContent = userName;
+						userNameCell.classList.add("userNameValue");
+						newRow.appendChild(userNameCell);
 	
 						var titleCell = document.createElement("td");
 						titleCell.textContent = title;
@@ -382,6 +334,43 @@
 				})
 				.catch(error => {
 					// 处理请求错误
+					console.error('Error:', error);
+				});
+		}
+		
+		function viewBlog() {
+			var button = event.target;
+			const id = button.dataset.id;
+			const idCell = button.closest("tr").querySelector(".idValue");
+			const idValue = idCell.textContent;
+		
+			fetch('http://localhost:8080/api/blog/getOneBlog?id=' + idValue, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				})
+				.then(response => response.json())
+				.then(data => {
+					const blog = data.data;
+					console.log(blog)
+					const id = blog.id;
+					const title = blog.title;
+					const content = blog.content;
+					const userName = blog.user.username;
+					const avatarUrl = blog.user.avatarUrl;
+					const time = blog.createTime.replace(/T/g, ' ');
+					
+					
+					window.sessionStorage.setItem('id', id);
+					window.sessionStorage.setItem('title', title);
+					window.sessionStorage.setItem('content', content);
+					window.sessionStorage.setItem('userName', userName);
+					window.sessionStorage.setItem('avatarUrl', avatarUrl);
+					window.sessionStorage.setItem('time', time);
+					window.location.href = "blog.html";
+				})
+				.catch((error) => {
 					console.error('Error:', error);
 				});
 		}
